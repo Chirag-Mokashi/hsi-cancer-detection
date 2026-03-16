@@ -1,0 +1,44 @@
+# Data files - never push these to GitHub
+*.npz
+*.npy
+preprocessed/
+results/
+
+# Raw HSI data folders
+P1/
+P2/
+P3/
+ROI_*/
+
+# Reference and binary files
+raw
+raw.hdr
+darkReference
+darkReference.hdr
+whiteReference
+whiteReference.hdr
+*.sums
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# VS Code / Antigravity
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Large model checkpoints
+*.pt
+*.pth
+*.h5
+*.pkl
