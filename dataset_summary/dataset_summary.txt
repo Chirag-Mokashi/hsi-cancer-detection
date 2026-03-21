@@ -1,0 +1,56 @@
+HistologyHSI-GB Dataset Summary
+================================
+
+Source: The Cancer Imaging Archive (TCIA)
+Collection: HistologyHSI-GB
+Cancer type: Glioblastoma (WHO Grade IV)
+Imaging type: Hyperspectral histology slides
+
+RAW DATA SPECIFICATIONS
+-----------------------
+Image dimensions : 800 x 1004 pixels per ROI
+Spectral bands   : 826 bands (400.5 nm to 1000.7 nm)
+Spectral step    : ~0.73 nm per band
+Data type        : uint16 (raw sensor counts 65-3106)
+Storage format   : ENVI BIL binary + .hdr header
+Calibration      : darkReference + whiteReference per ROI
+
+DATASET STRUCTURE
+-----------------
+Total patients   : 3 (P1, P2, P3) + top-level ROIs
+Total ROI folders: 134
+Tumor ROIs   (T) : 39
+Normal ROIs (NT) : 95
+T/NT ratio       : 0.41 (imbalanced)
+Total raw size   : ~177.8 GB
+
+PREPROCESSING APPLIED
+---------------------
+Step 1: Reflectance calibration
+  Formula: Reflection = (Raw - Dark) / (White - Dark)
+  Values clipped to [0.0, 1.0]
+Step 2: Band selection
+  Removed bands above 909 nm (noisy region)
+  826 bands -> 699 bands kept (400.5 nm to 909.0 nm)
+Step 3: Per-pixel normalization
+  Each pixel spectrum divided by its own maximum value
+  Removes brightness variation, preserves spectral shape
+Step 4: Saved as HDF5 (.h5)
+  Format: float32, gzip compressed
+  Final shape per ROI: (800, 1004, 699)
+
+VERIFIED FILES PER PATIENT
+--------------------------
+  P1: 12 tumor, 42 normal
+  P2: 12 tumor, 21 normal
+  P3: 12 tumor, 29 normal
+  top-level: 3 tumor, 3 normal
+
+SPECTRAL INFORMATION (after preprocessing)
+------------------------------------------
+Wavelength range : 400.5 nm to 908.3 nm
+Number of bands  : 699
+Value range      : [0.0, 1.0] float32
+Tumor mean spectrum peak  : 0.9838 at 887.2 nm
+Normal mean spectrum peak : 0.9903 at 874.9 nm
+Most discriminative region: ~520-560 nm (green absorption trough)
