@@ -1,0 +1,108 @@
+SAMPLE DATA ANALYSIS REPORT
+============================================================
+
+1. BASIC STATISTICS
+--------------------------------------------------
+  Samples file     : C:\Users\mokas\OneDrive\Desktop\HSI\preprocessed\samples.h5
+  Total samples    : 67000
+  Tumor (T)        : 19500 (29.1%)
+  Normal (NT)      : 47500 (70.9%)
+  Bands            : 699
+  Wavelength range : 400.5 - 908.3 nm
+  X global min     : 0.019802
+  X global max     : 1.000000
+  X global mean    : 0.861953
+  X global std     : 0.190469
+  NaN values       : 0
+  Inf values       : 0
+  Values outside [0,1]: 0
+  Values exactly 0.0  : 0 (0.000%)
+  Values exactly 1.0  : 9300884 (19.860%)
+
+  Per-class global statistics:
+                              Tumor       Normal
+  Mean                     0.821109     0.878720
+  Std                      0.220496     0.173915
+  Min                      0.019802     0.028213
+  Max                      1.000000     1.000000
+
+2. PER-BAND DISCRIMINABILITY
+--------------------------------------------------
+  Single most discriminative wavelength: 596.9 nm (band 270, d=0.9798)
+
+  Top 20 most discriminative bands (Cohen's d):
+  Rank   Band  Wavelength    Mean_T   Mean_NT   Cohen_d    t-stat
+     1    270     596.9 nm    0.7180    0.8699    0.9798     104.4
+     2    271     597.7 nm    0.7186    0.8706    0.9798     104.4
+     3    267     594.7 nm    0.7161    0.8681    0.9791     104.4
+     4    274     599.8 nm    0.7208    0.8725    0.9790     104.3
+     5    275     600.6 nm    0.7216    0.8732    0.9788     104.3
+     6    272     598.4 nm    0.7194    0.8712    0.9788     104.3
+     7    269     596.2 nm    0.7174    0.8693    0.9785     104.3
+     8    268     595.5 nm    0.7168    0.8687    0.9784     104.3
+     9    265     593.3 nm    0.7147    0.8666    0.9783     104.3
+    10    273     599.1 nm    0.7202    0.8718    0.9783     104.2
+    11    276     601.3 nm    0.7224    0.8738    0.9778     104.1
+    12    277     602.0 nm    0.7232    0.8745    0.9778     104.1
+    13    263     591.8 nm    0.7135    0.8653    0.9777     104.3
+    14    266     594.0 nm    0.7156    0.8673    0.9776     104.2
+    15    262     591.1 nm    0.7128    0.8644    0.9774     104.3
+    16    264     592.6 nm    0.7143    0.8660    0.9773     104.2
+    17    279     603.5 nm    0.7249    0.8759    0.9771     104.0
+    18    281     604.9 nm    0.7268    0.8774    0.9768     104.0
+    19    278     602.7 nm    0.7241    0.8752    0.9768     104.0
+    20    260     589.7 nm    0.7113    0.8628    0.9763     104.2
+
+  Bottom 10 least discriminative bands (Cohen's d):
+  Rank   Band  Wavelength    Mean_T   Mean_NT   Cohen_d
+     1    698     908.3 nm    0.9843    0.9894    0.2960
+     2    695     906.1 nm    0.9842    0.9895    0.3101
+     3    697     907.6 nm    0.9841    0.9895    0.3131
+     4    692     904.0 nm    0.9843    0.9896    0.3133
+     5    696     906.9 nm    0.9841    0.9895    0.3164
+     6    693     904.7 nm    0.9841    0.9895    0.3212
+     7    694     905.4 nm    0.9838    0.9894    0.3274
+     8    691     903.2 nm    0.9841    0.9896    0.3285
+     9    690     902.5 nm    0.9841    0.9896    0.3291
+    10    685     898.9 nm    0.9844    0.9898    0.3292
+
+  Mean Cohen's d by spectral region:
+    Violet/Blue  400-500nm: mean_d=0.7120  max_d=0.7601  bands=137
+    Green        500-570nm: mean_d=0.4781  max_d=0.7854  bands=96
+    Red          570-700nm: mean_d=0.8803  max_d=0.9798  bands=179
+    NIR          700-909nm: mean_d=0.5360  max_d=0.6940  bands=287
+
+3. BAND CORRELATION STRUCTURE
+--------------------------------------------------
+  Mean inter-band correlation  : 0.5570
+  Median inter-band correlation: 0.6186
+  Pairs with |r| > 0.95        : 16659 / 243951
+  Pairs with |r| > 0.99        : 5799 / 243951
+  Pairs with |r| < 0.50        : 101528 / 243951
+  Most redundant band  : band 402 (693.0 nm), mean |r|=0.6860
+  Least redundant band : band 698 (908.3 nm), mean |r|=0.3429
+
+4. VARIANCE ANALYSIS
+--------------------------------------------------
+  Bands needed for 90% variance: 287
+  Bands needed for 95% variance: 335
+  Bands needed for 99% variance: 424
+  Lowest-variance 5% bands: 35 bands, wavelengths 826.8 - 877.8 nm
+  (These are candidates for removal in MI/LASSO)
+
+5. ANOMALY / QUALITY CHECKS
+--------------------------------------------------
+  All-zero pixel spectra : 0
+  Flat spectrum pixels   : 0
+  Pixels with max < 0.99 : 0 (0.00%)
+  Band with most saturation: band 686 (899.6 nm), 32437 pixels
+
+6. KEY INSIGHTS FOR BAND SELECTION (Step 3)
+--------------------------------------------------
+  - Most discriminative region is Red 570-700nm (mean d=0.8803)
+  - Peak discriminability at 596.9 nm (d=0.9798)
+  - 16,659 band pairs have |r|>0.95 confirming high redundancy -> band selection justified
+  - NIR tail (826-878nm) is lowest variance -> likely to be dropped by MI/LASSO
+  - Per-pixel normalization confirmed: 0 pixels with max < 0.99
+  - Class mean difference: T=0.8211 vs NT=0.8787 (delta=0.0576)
+  - T has higher std (0.2205) than NT (0.1739) -> tumor is spectrally more variable

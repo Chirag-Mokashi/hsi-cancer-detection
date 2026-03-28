@@ -255,7 +255,7 @@ with h5py.File('preprocessed/P1_ROI_01_C01_T.h5', 'r') as f:
 
 ---
 
-## Step 3 - Band Selection (PENDING)
+## Step 3 - Band Selection (IN PROGRESS)
 
 **Goal:** Reduce 699 bands to informative subset. Compare 4 methods at 5 band counts.
 
@@ -437,9 +437,8 @@ Step 7: ablation studies - band count, patch size, class weighting
 
 ## Next Actions
 
-1. Begin Step 3: band selection
-2. Install scikit-learn if not already: python -m pip install scikit-learn
-3. Write band_selection.py - PCA, Mutual Information, LASSO, ACO across 5 band counts
-4. Upload preprocessed h5 files to Google Drive for Colab access
-5. Output: 20 reduced datasets (4 methods x 5 band counts: 4, 10, 20, 50, 100)
-6. Commit: Step 3: band selection - PCA, MI, LASSO, ACO comparison
+1. Upload preprocessed/samples.h5 to Google Drive (HSI/ folder)
+2. Write and run band_selection.ipynb on Colab (PCA, MI, LASSO at 5 band counts)
+3. Download band_indices.json back locally
+4. Commit: Step 3 complete
+5. Begin Step 4: model training
