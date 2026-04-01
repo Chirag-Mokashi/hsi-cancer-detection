@@ -255,25 +255,54 @@ with h5py.File('preprocessed/P1_ROI_01_C01_T.h5', 'r') as f:
 
 ---
 
-## Step 3 - Band Selection (IN PROGRESS)
+## Step 3 - Band Selection (COMPLETE)
 
-**Goal:** Reduce 699 bands to informative subset. Compare 4 methods at 5 band counts.
+**Goal:** Reduce 699 bands to informative subset. Compare 3 methods at 5 band counts.
+ACO deferred — complex to implement, will add later if needed.
 
-**Methods:**
+**Scripts:**
+- sample_pixels.py: samples 500 pixels per ROI -> preprocessed/samples.h5 (67000 x 699)
+- analyse_samples.py: spectral analysis, Cohen's d per band -> dataset_summary/sample_analysis/
+- band_selection/band_selection.ipynb: PCA, MI, LASSO on Colab (CPU runtime, ~5 min)
+
+**Methods run:**
 | Method | Type | Library | Notes |
 |--------|------|---------|-------|
-| PCA | Unsupervised | scikit-learn | Fast, not interpretable wavelengths |
-| Mutual Information | Supervised | scikit-learn | Ranks bands by info vs class labels |
-| LASSO | Supervised | scikit-learn | L1 regression forces bands to zero |
-| Ant Colony Optimization | Supervised | Custom | Best results, most expensive |
+| PCA | Unsupervised | scikit-learn | Top loading band per component |
+| Mutual Information | Supervised | scikit-learn | Ranked by MI score, n_jobs=-1 |
+| LASSO | Supervised | scikit-learn | L1 path, 50 alphas, 20000 pixel subsample |
 
-**Band counts to test:** 4, 10, 20, 50, 100
+**Band counts:** 4, 10, 20, 50, 100
 
-**Output:** 20 reduced datasets (4 methods x 5 counts)
+**Output files (band_selection/):**
+- bands_PCA.json, bands_MI.json, bands_LASSO.json
+- Each: {"4": {"indices": [...], "wavelengths_nm": [...]}, "10": ..., ...}
+- band_selection_PCA.png, band_selection_MI.png, band_selection_LASSO.png
 
-**Expected from literature:**
-- 800-900 nm range consistently most informative
-- 4-20 carefully selected bands often match full-spectrum performance
+**Key results:**
+
+MI - selects exclusively from Red 570-644 nm (highest Cohen's d region, mean=0.88).
+All band counts tightly clustered in this region. Scientifically strongest result.
+
+LASSO - selects from 3 distinct spectral regions:
+  n=4 : 596-597 nm + 788-805 nm
+  n=10: 569-600 nm + 788-821 nm
+  n=20: Red + Red-edge (685-700 nm) + NIR (788-832 nm)
+  n=50+: expands all 3 regions
+NIR selection (788-832 nm) aligns with Pike et al. (800-890 nm most informative).
+
+PCA - works well at n=4 (544-558 nm). Degrades at n>=20: selects consecutive
+correlated bands in 400-465 nm region. Band 698 (908.3 nm, worst discriminability
+by Cohen's d=0.296) appears at n=50. This is a known limitation of unsupervised
+band selection under high inter-band correlation (mean |r|=0.557 in this dataset).
+Root causes: high HSI inter-band correlation, per-pixel normalization flattening
+NIR variance, PCA being unsupervised (ignores class labels). Not a data size issue.
+Will be reported as a finding in the paper.
+
+**Samples.h5 location:** preprocessed/samples.h5 (121 MB, excluded from git)
+Also uploaded to Google Drive: G:\My Drive\HSI\samples.h5 (Colab Pro account)
+
+**Git commit:** Step 3 complete - band selection done (PCA, MI, LASSO at 5 band counts)
 
 ---
 
@@ -424,7 +453,7 @@ Step 1: dataset inspection complete - 134 ROIs, 3 patients, 826 bands, 400-1001n
 Add gitignore - exclude raw data, npz files, and OS artifacts
 Step 2: dataset summary and visuals - spectral signatures, RGB previews (partial data)
 Step 2: preprocessing complete - 134 ROIs verified, patient labels fixed, dataset summary regenerated
-Step 3: band selection - PCA, MI, LASSO, ACO comparison
+Step 3: band selection - PCA, MI, LASSO comparison (ACO deferred)
 Step 4a: Random Forest and SVM training
 Step 4b: MSF + SVM training
 Step 4c: HybridSN CNN training (Colab)
@@ -437,8 +466,13 @@ Step 7: ablation studies - band count, patch size, class weighting
 
 ## Next Actions
 
-1. Upload preprocessed/samples.h5 to Google Drive (HSI/ folder)
-2. Write and run band_selection.ipynb on Colab (PCA, MI, LASSO at 5 band counts)
-3. Download band_indices.json back locally
-4. Commit: Step 3 complete
-5. Begin Step 4: model training
+1. Commit Step 3 complete
+2. Begin Step 4a: Random Forest + SVM (local, scikit-learn)
+   - Load preprocessed h5 files, slice bands using band_selection JSON files
+   - Train per band method (MI, LASSO, PCA) x band count (4,10,20,50,100)
+   - LOPOCV: train on 2 patients, test on 1 (top-level ROIs assigned to P1)
+   - Class weights: ~2.4x for tumor
+   - Metrics: Accuracy, Sensitivity, Specificity, F1 (macro), AUC
+3. Step 4b: MSF + SVM (local, custom Prim's algorithm)
+4. Step 4c: HybridSN CNN (Colab, T4 GPU, PyTorch)
+5. Step 4d: Vision Transformer (Colab, A100 GPU, PyTorch)

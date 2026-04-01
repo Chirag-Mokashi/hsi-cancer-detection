@@ -68,9 +68,10 @@ Raw ENVI BIL cubes (uint16, 826 bands)
    shape: (800, 1004, 699) per ROI
          |
          v
-5. Band selection  [PENDING]
-   PCA / Mutual Information / LASSO / Ant Colony Optimization
+5. Band selection  [COMPLETE]
+   PCA / Mutual Information / LASSO
    Band counts: 4, 10, 20, 50, 100
+   Results in band_selection/
          |
          v
 6. Model training  [PENDING]
@@ -93,9 +94,19 @@ Raw ENVI BIL cubes (uint16, 826 bands)
 hsi-cancer-detection/
     inspect_dataset.py          Step 1: dataset inspection
     preprocess.py               Step 2: preprocessing pipeline (v4)
+    sample_pixels.py            Step 3: pixel sampling for band selection
+    analyse_samples.py          Step 3: spectral analysis of sampled pixels
     audit.py                    Integrity check on all preprocessed h5 files
     fix_patient.py              Utility: fix patient attribute in h5 files
     regenerate_summary.py       Regenerate dataset summary visuals
+    band_selection/
+        band_selection.ipynb    Step 3: Colab notebook (PCA, MI, LASSO)
+        bands_PCA.json          Selected band indices + wavelengths (PCA)
+        bands_MI.json           Selected band indices + wavelengths (MI)
+        bands_LASSO.json        Selected band indices + wavelengths (LASSO)
+        band_selection_PCA.png  Selected bands visualised on mean spectrum
+        band_selection_MI.png
+        band_selection_LASSO.png
     dataset_summary/
         class_distribution.png  ROI counts per patient and class
         spectral_signatures.png Mean spectra: tumor vs normal (400-909 nm)
@@ -103,6 +114,7 @@ hsi-cancer-detection/
         dataset_summary.txt     Full dataset statistics
         rgb_preview.png         Pseudo-RGB tissue preview
         preprocessing_summary.png Before/after preprocessing
+        sample_analysis/        Spectral discriminability plots and report
     PROJECT_LOG.md              Full running project log
     .gitignore                  Excludes raw data, h5 files, model weights
 ```
@@ -110,6 +122,24 @@ hsi-cancer-detection/
 ---
 
 ## Current Results
+
+**Step 3 complete — Band selection done:**
+
+| Method | n=4 | n=10 | n=20 | n=50 | n=100 |
+|--------|-----|------|------|------|-------|
+| MI | 594-615 nm | 594-619 nm | 594-625 nm | 586-630 nm | 572-644 nm |
+| LASSO | 597+788-805 nm | 569-600+788-821 nm | multi-region | multi-region | multi-region |
+| PCA | 544-558 nm | 544-659 nm | degrades* | degrades* | degrades* |
+
+*PCA selects consecutive correlated bands from n=20 onwards due to high inter-band
+correlation inherent to HSI (mean |r|=0.557). This is a documented limitation of
+unsupervised band selection and is reported as a finding.
+
+**Key band selection findings:**
+- MI consistently selects the Red 570-644 nm region (highest Cohen's d, mean=0.88)
+- LASSO selects diverse bands across Red (~597 nm), Red-edge (~685-700 nm), and NIR
+  (~788-832 nm) — the NIR selection aligns with Pike et al. (800-890 nm most informative)
+- Supervised methods (MI, LASSO) outperform unsupervised (PCA) for HSI band selection
 
 **Step 2 complete — Preprocessing verified:**
 
