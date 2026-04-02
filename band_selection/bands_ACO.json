@@ -1,0 +1,8 @@
+{
+  "_note": "Placeholder - ACO not yet run. Populate to activate ACO in grid.",
+  "4":   {"indices": [], "wavelengths_nm": []},
+  "10":  {"indices": [], "wavelengths_nm": []},
+  "20":  {"indices": [], "wavelengths_nm": []},
+  "50":  {"indices": [], "wavelengths_nm": []},
+  "100": {"indices": [], "wavelengths_nm": []}
+}

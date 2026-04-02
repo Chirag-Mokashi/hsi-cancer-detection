@@ -2,7 +2,8 @@
 *.npz
 *.npy
 preprocessed/
-results/
+results/HybridSN/checkpoints/
+results/ViT/checkpoints/
 
 # Raw HSI data folders
 P1/
