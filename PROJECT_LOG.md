@@ -306,14 +306,43 @@ Also uploaded to Google Drive: G:\My Drive\HSI\samples.h5 (Colab Pro account)
 
 ---
 
-## Step 4 - Models (PENDING)
+## Step 4 - Models (IN PROGRESS)
 
-| Model | Type | Where | Implementation |
-|-------|------|-------|----------------|
-| Random Forest + SVM | Classical ML | Local | scikit-learn |
-| MSF + SVM | Spectral-spatial graph | Local | Custom (Prim's algorithm) |
-| HybridSN | 3D+2D CNN | Google Colab | PyTorch |
-| Vision Transformer | ViT pixel-level | Google Colab | PyTorch / HuggingFace |
+### Step 4a - Random Forest (COMPLETE)
+
+**Script:** 4a_random_forest.py
+**Config:** 500 trees, class_weight=balanced, n_jobs=-1, seed=42
+**Grid:** 16 combos (PCA/MI/LASSO x 5 band counts + FullSpectrum) x 3 LOPOCV folds = 48 runs
+**Results:** results/RF/rf_v1_results.csv (48 rows), rf_v1_summary.csv (16 rows)
+
+**Key findings:**
+- LASSO/100 best AUC (0.806 mean), LASSO consistently strong across band counts
+- MI most consistent (lowest std ~0.06 across folds)
+- PCA worst sensitivity — unsupervised band selection limitation confirmed in model results
+- FullSpectrum AUC 0.767 — not much gain over LASSO despite 699 bands
+- Fold 2 (P2 held out) hardest across ALL methods — sensitivity collapses to near-zero for
+  LASSO/FullSpectrum on P2 test set. Patient-level generalization finding worth reporting.
+
+**Top results (mean AUC across 3 folds):**
+| Method | Bands | AUC | F1 |
+|--------|-------|-----|----|
+| LASSO | 100 | 0.806 | 0.614 |
+| LASSO | 50 | 0.797 | 0.613 |
+| LASSO | 20 | 0.784 | 0.608 |
+| FullSpectrum | 699 | 0.767 | 0.594 |
+| MI | 100 | 0.758 | 0.673 |
+
+**Git commit:** Step 4a: RF complete - 48 runs, LASSO/100 best AUC 0.806
+
+### Step 4b - SVM (RUNNING)
+
+| Model | Type | Where | Status |
+|-------|------|-------|--------|
+| Random Forest | Classical ML | Local | COMPLETE |
+| SVM | Classical ML | Local | RUNNING |
+| HybridSN 3D+2D CNN | Deep Learning | Colab T4 | PENDING |
+| Vision Transformer | Deep Learning | Colab A100 | PENDING |
+| MSF + SVM | Spectral-spatial | Local | OPTIONAL/LAST |
 
 **Class imbalance:** T/NT = 0.41 - use class weights (~2.4x for tumor class)
 
