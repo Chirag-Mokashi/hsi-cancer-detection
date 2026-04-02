@@ -340,9 +340,37 @@ Also uploaded to Google Drive: G:\My Drive\HSI\samples.h5 (Colab Pro account)
 |-------|------|-------|--------|
 | Random Forest | Classical ML | Local | COMPLETE |
 | SVM | Classical ML | Local | RUNNING |
-| HybridSN 3D+2D CNN | Deep Learning | Colab T4 | PENDING |
-| Vision Transformer | Deep Learning | Colab A100 | PENDING |
+| HybridSN 3D+2D CNN | Deep Learning | Colab T4 | NOTEBOOK READY |
+| Vision Transformer | Deep Learning | Colab A100 | NOTEBOOK READY |
 | MSF + SVM | Spectral-spatial | Local | OPTIONAL/LAST |
+
+### Step 4c - HybridSN (NOTEBOOK READY)
+
+**Script:** 4c_hybridSN.ipynb
+**GPU:** Colab T4
+**Architecture:** Roy et al. 2020 canonical - 3D Conv (1->8->16->32) + 2D Conv (64) + Dense (256->128->2)
+**Config:** Adam lr=1e-3, batch=64, epochs=50, ES patience=10, ReduceLROnPlateau factor=0.5 patience=3
+**Loss:** CrossEntropyLoss with 2.4x tumor class weight (v1); BCE comparison in v2
+**Ablation:** patch sizes [1, 6, 11] in separate hybridSN_v1_ablation.csv
+**Notes:**
+- Block-based patch extraction (1 h5py read/file) for Drive I/O efficiency
+- torch.manual_seed before each model instantiation (reproducibility)
+- cudnn.deterministic=True, benchmark=False
+- evaluate_loader is BCE/CE-aware (sigmoid for BCE, softmax for CE)
+- num_workers=2 comment to switch to 0 if Colab multiprocessing fails
+
+### Step 4d - Vision Transformer (NOTEBOOK READY)
+
+**Script:** 4d_vit.ipynb
+**GPU:** Colab A100
+**Architecture:** Custom ViT from scratch (pure PyTorch, not HuggingFace/timm)
+- Linear token projection -> CLS + learnable positional embeddings
+- 4x TransformerEncoderLayer (pre-LN, GELU, d=64, heads=4, mlp_ratio=4, dropout=0.1)
+- CLS token -> Linear(64, 2) classification head
+**Token geometry:** patch=11, token_size=4 -> 9 tokens of dim 16*n_bands
+**Config:** Adam lr=1e-4, batch=32, epochs=50, ES patience=10, 5-epoch warmup + ReduceLROnPlateau
+**Ablation:** patch sizes [1, 6, 11]; patch=1 uses token_size=1 (pixel-level ViT)
+**CSV extra column:** token_size (tracks token geometry per run)
 
 **Class imbalance:** T/NT = 0.41 - use class weights (~2.4x for tumor class)
 
