@@ -334,15 +334,42 @@ Also uploaded to Google Drive: G:\My Drive\HSI\samples.h5 (Colab Pro account)
 
 **Git commit:** Step 4a: RF complete - 48 runs, LASSO/100 best AUC 0.806
 
-### Step 4b - SVM (RUNNING)
+### Step 4b - SVM (COMPLETE)
 
 | Model | Type | Where | Status |
 |-------|------|-------|--------|
 | Random Forest | Classical ML | Local | COMPLETE |
-| SVM | Classical ML | Local | RUNNING |
+| SVM | Classical ML | Local | COMPLETE |
 | HybridSN 3D+2D CNN | Deep Learning | Colab T4 | NOTEBOOK READY |
 | Vision Transformer | Deep Learning | Colab A100 | NOTEBOOK READY |
 | MSF + SVM | Spectral-spatial | Local | OPTIONAL/LAST |
+
+**Script:** 4b_svm.py
+**Config:** SVC(kernel='rbf', probability=True), StandardScaler (train only), seed=42
+**Runtime:** ~30h 21min (FullSpectrum O(n^2) bottleneck)
+**Results:** results/SVM/svm_v1_results.csv (48 rows), svm_v1_summary.csv (16 rows)
+
+**Key findings:**
+- LASSO dominates — best AUC: LASSO/100 = 0.873, LASSO/50 = 0.872 (essentially equal)
+- FullSpectrum AUC 0.862 — strong but LASSO/50 beats it with 14x fewer bands
+- MI plateaus quickly — MI/4 AUC 0.728, MI/100 = 0.779, diminishing returns
+- PCA weakest — best PCA/4 = 0.744, all others below 0.735
+- Fold 2 (P2) sensitivity collapse confirmed again — same as RF finding
+  - LASSO/4 fold2: sens=0.000 (complete collapse)
+  - FullSpectrum fold2: sens=0.133
+  - P2 patient generalizes poorly across ALL classical ML methods
+- LASSO/20 gives 0.849 AUC — strong result with only 20 bands (paper-worthy)
+
+**Top results (mean AUC across 3 folds):**
+| Method | Bands | AUC | F1 |
+|--------|-------|-----|----|
+| LASSO | 100 | 0.873 | 0.713 |
+| LASSO | 50 | 0.872 | 0.713 |
+| FullSpectrum | 699 | 0.862 | 0.677 |
+| LASSO | 20 | 0.849 | 0.699 |
+| LASSO | 10 | 0.806 | 0.635 |
+
+**Git commit:** Step 4b: SVM complete - 48 runs, LASSO/100 best AUC 0.873
 
 ### Step 4c - HybridSN (NOTEBOOK READY)
 
