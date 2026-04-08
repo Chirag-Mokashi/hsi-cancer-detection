@@ -1,0 +1,120 @@
+[2026-04-07 04:40:28] [ 9/45] fold=3 PCA/20 f1=0.773 auc=0.871 acc=0.790 sens=0.885 train=353s
+[2026-04-07 14:24:51] [10/45] fold=1 PCA/50 f1=0.270 auc=0.639 acc=0.277 sens=0.756 train=92s
+[2026-04-07 14:49:17] [11/45] fold=2 PCA/50 f1=0.267 auc=0.820 acc=0.364 sens=1.000 train=118s
+[2026-04-07 15:19:32] [12/45] fold=3 PCA/50 f1=0.747 auc=0.852 acc=0.776 sens=0.748 train=470s
+[2026-04-07 15:43:14] [13/45] fold=1 PCA/100 f1=0.336 auc=0.650 acc=0.337 sens=0.726 train=93s
+[2026-04-07 16:05:55] [14/45] fold=2 PCA/100 f1=0.685 auc=0.788 acc=0.705 sens=0.621 train=138s
+[2026-04-07 16:35:10] [15/45] fold=3 PCA/100 f1=0.680 auc=0.791 acc=0.730 sens=0.571 train=520s
+[2026-04-07 17:02:12] [16/45] fold=1 MI/4 f1=0.433 auc=0.691 acc=0.435 sens=0.752 train=400s
+[2026-04-07 17:30:11] [17/45] fold=2 MI/4 f1=0.363 auc=0.716 acc=0.398 sens=0.872 train=519s
+[2026-04-07 17:56:16] [18/45] fold=3 MI/4 f1=0.759 auc=0.833 acc=0.783 sens=0.802 train=476s
+[2026-04-07 18:16:35] [19/45] fold=1 MI/10 f1=0.324 auc=0.704 acc=0.328 sens=0.795 train=85s
+[2026-04-07 18:37:49] [20/45] fold=2 MI/10 f1=0.407 auc=0.818 acc=0.437 sens=0.910 train=174s
+[2026-04-07 19:01:27] [21/45] fold=3 MI/10 f1=0.765 auc=0.848 acc=0.784 sens=0.854 train=316s
+[2026-04-07 19:21:33] [22/45] fold=1 MI/20 f1=0.237 auc=0.703 acc=0.265 sens=0.909 train=94s
+[2026-04-07 19:41:46] [23/45] fold=2 MI/20 f1=0.267 auc=0.773 acc=0.364 sens=1.000 train=172s
+[2026-04-07 20:02:12] [24/45] fold=3 MI/20 f1=0.796 auc=0.881 acc=0.815 sens=0.862 train=194s
+[2026-04-07 20:21:45] [25/45] fold=1 MI/50 f1=0.309 auc=0.704 acc=0.314 sens=0.805 train=125s
+[2026-04-07 20:42:17] [26/45] fold=2 MI/50 f1=0.316 auc=0.792 acc=0.378 sens=0.933 train=205s
+[2026-04-07 21:01:19] [27/45] fold=3 MI/50 f1=0.700 auc=0.876 acc=0.709 sens=0.924 train=157s
+[2026-04-07 21:19:54] [28/45] fold=1 MI/100 f1=0.444 auc=0.691 acc=0.447 sens=0.746 train=96s
+[2026-04-07 21:41:01] [29/45] fold=2 MI/100 f1=0.755 auc=0.775 acc=0.761 sens=0.837 train=246s
+[2026-04-07 22:06:29] [30/45] fold=3 MI/100 f1=0.803 auc=0.929 acc=0.818 sens=0.926 train=542s
+[2026-04-07 22:30:09] [31/45] fold=1 LASSO/4 f1=0.443 auc=0.684 acc=0.446 sens=0.750 train=407s
+[2026-04-07 22:55:42] [32/45] fold=2 LASSO/4 f1=0.414 auc=0.614 acc=0.422 sens=0.742 train=554s
+[2026-04-07 23:20:38] [33/45] fold=3 LASSO/4 f1=0.727 auc=0.853 acc=0.744 sens=0.844 train=509s
+[2026-04-07 23:45:04] [34/45] fold=1 LASSO/10 f1=0.454 auc=0.703 acc=0.454 sens=0.913 train=405s
+[2026-04-08 00:11:27] [35/45] fold=2 LASSO/10 f1=0.701 auc=0.708 acc=0.715 sens=0.680 train=554s
+[2026-04-08 00:37:03] [36/45] fold=3 LASSO/10 f1=0.774 auc=0.924 acc=0.787 sens=0.929 train=509s
+[2026-04-08 01:02:02] [37/45] fold=1 LASSO/20 f1=0.557 auc=0.754 acc=0.562 sens=0.914 train=406s
+[2026-04-08 01:29:03] [38/45] fold=2 LASSO/20 f1=0.363 auc=0.617 acc=0.377 sens=0.720 train=548s
+[2026-04-08 01:55:32] [39/45] fold=3 LASSO/20 f1=0.818 auc=0.927 acc=0.835 sens=0.909 train=510s
+[2026-04-08 02:21:48] [40/45] fold=1 LASSO/50 f1=0.522 auc=0.643 acc=0.537 sens=0.723 train=415s
+[2026-04-08 02:50:23] [41/45] fold=2 LASSO/50 f1=0.493 auc=0.689 acc=0.496 sens=0.778 train=566s
+[2026-04-08 03:18:25] [42/45] fold=3 LASSO/50 f1=0.801 auc=0.926 acc=0.815 sens=0.931 train=522s
+[2026-04-08 03:46:10] [43/45] fold=1 LASSO/100 f1=0.482 auc=0.712 acc=0.482 sens=0.896 train=427s
+[2026-04-08 04:16:08] [44/45] fold=2 LASSO/100 f1=0.571 auc=0.645 acc=0.573 sens=0.698 train=584s
+[2026-04-08 04:46:07] [45/45] fold=3 LASSO/100 f1=0.775 auc=0.903 acc=0.788 sens=0.935 train=536s
+[2026-04-08 05:10:15] [ 1/9] fold=1 PCA/4 ERROR: name 'N_TOKENS' is not defined
+[2026-04-08 05:30:50] [ 2/9] fold=2 PCA/4 ERROR: name 'N_TOKENS' is not defined
+[2026-04-08 05:52:32] [ 3/9] fold=3 PCA/4 ERROR: name 'N_TOKENS' is not defined
+[2026-04-08 06:17:05] [ 4/9] fold=1 PCA/10 ERROR: name 'N_TOKENS' is not defined
+[2026-04-08 06:37:46] [ 5/9] fold=2 PCA/10 ERROR: name 'N_TOKENS' is not defined
+[2026-04-08 07:01:15] [ 6/9] fold=3 PCA/10 ERROR: name 'N_TOKENS' is not defined
+[2026-04-08 07:24:54] [ 7/9] fold=1 PCA/20 ERROR: name 'N_TOKENS' is not defined
+[2026-04-08 07:42:21] [ 8/9] fold=2 PCA/20 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 07:42:21 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P2_ROI_02_C04_NT.h5', file descriptor = 104, errno = 5, error message = 'Input/output error', buf = 0x7fff1a9360b8, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 07:42:24] [ 9/9] fold=3 PCA/20 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 07:42:24 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 104, errno = 5, error message = 'Input/output error', buf = 0x7fff1a9360b8, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:38:09] [ 1/9] fold=1 PCA/4 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:38:09 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P2_ROI_01_C02_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7ffe83c91588, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:38:13] [ 2/9] fold=2 PCA/4 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:38:13 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7ffe83c91588, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:38:15] [ 3/9] fold=3 PCA/4 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:38:15 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7ffe83c91588, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:38:20] [ 4/9] fold=1 PCA/10 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:38:20 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P2_ROI_01_C02_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7ffe83c91588, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:38:23] [ 5/9] fold=2 PCA/10 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:38:23 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7ffe83c91588, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:38:26] [ 6/9] fold=3 PCA/10 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:38:26 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7ffe83c91588, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:38:30] [ 7/9] fold=1 PCA/20 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:38:30 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P2_ROI_01_C02_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7ffe83c91588, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:38:33] [ 8/9] fold=2 PCA/20 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:38:33 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7ffe83c91588, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:38:36] [ 9/9] fold=3 PCA/20 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:38:36 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7ffe83c91588, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:39:41] [ 1/9] fold=1 PCA/4 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:39:41 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P2_ROI_01_C02_T.h5', file descriptor = 48, errno = 5, error message = 'Input/output error', buf = 0x7ffe83c91588, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:39:44] [ 2/9] fold=2 PCA/4 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:39:44 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 48, errno = 5, error message = 'Input/output error', buf = 0x7ffe83c91588, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:39:50] [ 3/9] fold=3 PCA/4 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:39:50 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 48, errno = 5, error message = 'Input/output error', buf = 0x46d59bb0, total read size = 3136, bytes this sub-read = 3136, offset = 1407573762)
+[2026-04-08 12:40:07] [ 4/9] fold=1 PCA/10 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:40:07 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P2_ROI_01_C03_T.h5', file descriptor = 48, errno = 5, error message = 'Input/output error', buf = 0x47d21200, total read size = 3136, bytes this sub-read = 3136, offset = 881758766)
+[2026-04-08 12:40:09] [ 5/9] fold=2 PCA/10 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:40:09 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 48, errno = 5, error message = 'Input/output error', buf = 0x47d1f390, total read size = 3136, bytes this sub-read = 3136, offset = 1407573762)
+[2026-04-08 12:40:11] [ 6/9] fold=3 PCA/10 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:40:11 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 48, errno = 5, error message = 'Input/output error', buf = 0x47d1f390, total read size = 3136, bytes this sub-read = 3136, offset = 1407573762)
+[2026-04-08 12:40:18] [ 7/9] fold=1 PCA/20 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:40:18 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P2_ROI_01_C03_T.h5', file descriptor = 48, errno = 5, error message = 'Input/output error', buf = 0x486f1520, total read size = 14209145, bytes this sub-read = 14209145, offset = 733930213)
+[2026-04-08 12:40:20] [ 8/9] fold=2 PCA/20 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:40:20 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 48, errno = 5, error message = 'Input/output error', buf = 0x46d59bb0, total read size = 3136, bytes this sub-read = 3136, offset = 1407573762)
+[2026-04-08 12:40:22] [ 9/9] fold=3 PCA/20 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:40:22 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 48, errno = 5, error message = 'Input/output error', buf = 0x46d59bb0, total read size = 3136, bytes this sub-read = 3136, offset = 1407573762)
+[2026-04-08 12:52:14] [ 1/9] fold=1 PCA/4 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:52:14 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P2_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7fffbdaca0d8, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:52:17] [ 2/9] fold=2 PCA/4 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:52:17 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7fffbdaca0d8, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:52:19] [ 3/9] fold=3 PCA/4 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:52:19 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7fffbdaca0d8, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:52:24] [ 4/9] fold=1 PCA/10 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:52:24 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P2_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x19908310, total read size = 3136, bytes this sub-read = 3136, offset = 886631855)
+[2026-04-08 12:52:28] [ 5/9] fold=2 PCA/10 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:52:28 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x19908ce0, total read size = 3136, bytes this sub-read = 3136, offset = 1407573762)
+[2026-04-08 12:52:30] [ 6/9] fold=3 PCA/10 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:52:30 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x19908ce0, total read size = 3136, bytes this sub-read = 3136, offset = 1407573762)
+[2026-04-08 12:52:32] [ 7/9] fold=1 PCA/20 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:52:32 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P2_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x19908ce0, total read size = 3136, bytes this sub-read = 3136, offset = 886631855)
+[2026-04-08 12:52:38] [ 8/9] fold=2 PCA/20 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:52:38 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7940069fee58, total read size = 23069366, bytes this sub-read = 23069366, offset = 462848)
+[2026-04-08 12:52:52] [ 9/9] fold=3 PCA/20 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:52:52 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C02_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7fffbdaca0d8, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:56:29] [ 1/9] fold=1 PCA/4 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:56:29 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P2_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7ffdc5c93ca8, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:56:32] [ 2/9] fold=2 PCA/4 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:56:32 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7ffdc5c93ca8, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:56:34] [ 3/9] fold=3 PCA/4 ERROR: [Errno 5] Unable to synchronously open file (file read failed: time = Wed Apr  8 12:56:34 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x7ffdc5c93ca8, total read size = 8, bytes this sub-read = 8, offset = 0)
+[2026-04-08 12:56:42] [ 4/9] fold=1 PCA/10 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:56:42 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P2_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x78574e2b1e58, total read size = 17629829, bytes this sub-read = 17629829, offset = 225280)
+[2026-04-08 12:56:47] [ 5/9] fold=2 PCA/10 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:56:47 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x1f060e20, total read size = 3136, bytes this sub-read = 3136, offset = 1407573762)
+[2026-04-08 12:56:49] [ 6/9] fold=3 PCA/10 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:56:49 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x1f060e20, total read size = 3136, bytes this sub-read = 3136, offset = 1407573762)
+[2026-04-08 12:56:53] [ 7/9] fold=1 PCA/20 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:56:53 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P2_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x200d7d88, total read size = 17629829, bytes this sub-read = 17629829, offset = 225280)
+[2026-04-08 12:56:55] [ 8/9] fold=2 PCA/20 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:56:55 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x1f060e20, total read size = 3136, bytes this sub-read = 3136, offset = 1407573762)
+[2026-04-08 12:56:57] [ 9/9] fold=3 PCA/20 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:56:57 2026
+, filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x1f060e20, total read size = 3136, bytes this sub-read = 3136, offset = 1407573762)
