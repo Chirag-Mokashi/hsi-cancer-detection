@@ -296,80 +296,12 @@ print('Saved sens_spec_scatter.png')
 
 
 # ============================================================
-# PLOT 5: wilcoxon_significance.csv + .png
-# Wilcoxon signed-rank test between model pairs on AUC
+# NOTE: Wilcoxon signed-rank test was removed (Q4 decision, April 7 2026).
+# Reason: LOPOCV produces only n=3 folds, which is insufficient for a
+# meaningful signed-rank significance interpretation. Formal statistical
+# testing (McNemar's test) may be revisited in a later phase once all
+# results are available.
 # ============================================================
-try:
-    from scipy.stats import wilcoxon
-
-    import itertools
-    model_aucs = {}
-    for model in models:
-        vals = []
-        for row in model_rows[model]:
-            v = row.get('auc', '')
-            if v != '':
-                try:
-                    vals.append(float(v))
-                except ValueError:
-                    pass
-        model_aucs[model] = np.array(vals)
-
-    wil_rows = []
-    wil_cols = ['model_a', 'model_b', 'n_pairs', 'statistic', 'p_value', 'significant']
-    pairs = list(itertools.combinations(models, 2))
-
-    for ma, mb in pairs:
-        a = model_aucs[ma]
-        b = model_aucs[mb]
-        n = min(len(a), len(b))
-        if n < 10:
-            wil_rows.append({'model_a': ma, 'model_b': mb, 'n_pairs': n,
-                             'statistic': '', 'p_value': '', 'significant': 'N/A (n<10)'})
-            continue
-        stat, p = wilcoxon(a[:n], b[:n], alternative='two-sided')
-        wil_rows.append({'model_a': ma, 'model_b': mb, 'n_pairs': n,
-                         'statistic': round(stat, 4), 'p_value': round(p, 6),
-                         'significant': 'Yes' if p < 0.05 else 'No'})
-
-    wil_csv = SUMMARY_DIR / 'wilcoxon_significance.csv'
-    with open(wil_csv, 'w', newline='') as fh:
-        writer = csv.DictWriter(fh, fieldnames=wil_cols)
-        writer.writeheader()
-        writer.writerows(wil_rows)
-    print('Saved wilcoxon_significance.csv')
-
-    # Heatmap of p-values
-    n_m = len(models)
-    p_matrix = np.ones((n_m, n_m))
-    for row in wil_rows:
-        i = models.index(row['model_a'])
-        j = models.index(row['model_b'])
-        p_val = row['p_value']
-        if p_val != '':
-            p_matrix[i, j] = float(p_val)
-            p_matrix[j, i] = float(p_val)
-
-    fig, ax = plt.subplots(figsize=(5, 4))
-    im = ax.imshow(p_matrix, cmap='RdYlGn_r', vmin=0, vmax=0.1)
-    ax.set_xticks(range(n_m))
-    ax.set_yticks(range(n_m))
-    ax.set_xticklabels(models, rotation=30, ha='right')
-    ax.set_yticklabels(models)
-    ax.set_title('Wilcoxon p-values (AUC, two-sided)')
-    for i in range(n_m):
-        for j in range(n_m):
-            if i != j:
-                ax.text(j, i, '{:.3f}'.format(p_matrix[i, j]),
-                        ha='center', va='center', fontsize=8)
-    plt.colorbar(im, ax=ax)
-    fig.tight_layout()
-    fig.savefig(SUMMARY_DIR / 'wilcoxon_significance.png', dpi=150)
-    plt.close(fig)
-    print('Saved wilcoxon_significance.png')
-
-except ImportError:
-    print('scipy not installed -- skipping Wilcoxon test. Run: pip install scipy')
 
 
 # ============================================================
@@ -382,4 +314,3 @@ print('  model_comparison.png')
 print('  auc_heatmap.png')
 print('  band_method_comparison.png')
 print('  sens_spec_scatter.png')
-print('  wilcoxon_significance.csv/.png')
