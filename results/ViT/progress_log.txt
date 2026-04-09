@@ -118,3 +118,12 @@
 , filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x1f060e20, total read size = 3136, bytes this sub-read = 3136, offset = 1407573762)
 [2026-04-08 12:56:57] [ 9/9] fold=3 PCA/20 ERROR: [Errno 5] Can't synchronously read data (file read failed: time = Wed Apr  8 12:56:57 2026
 , filename = '/content/drive/MyDrive/HSI/preprocessed/P1_ROI_01_C01_T.h5', file descriptor = 103, errno = 5, error message = 'Input/output error', buf = 0x1f060e20, total read size = 3136, bytes this sub-read = 3136, offset = 1407573762)
+[2026-04-09 14:40:46] [ 1/9] fold=1 PCA/4 f1=0.434 auc=0.505 acc=0.443 sens=0.632 train=352s
+[2026-04-09 15:11:29] [ 2/9] fold=2 PCA/4 f1=0.452 auc=0.426 acc=0.568 sens=0.149 train=472s
+[2026-04-09 15:42:55] [ 3/9] fold=3 PCA/4 f1=0.856 auc=0.935 acc=0.873 sens=0.904 train=435s
+[2026-04-09 16:10:53] [ 4/9] fold=1 PCA/10 f1=0.384 auc=0.552 acc=0.384 sens=0.736 train=351s
+[2026-04-09 16:33:34] [ 5/9] fold=2 PCA/10 f1=0.649 auc=0.812 acc=0.679 sens=0.531 train=172s
+[2026-04-09 17:00:53] [ 6/9] fold=3 PCA/10 f1=0.791 auc=0.874 acc=0.813 sens=0.838 train=443s
+[2026-04-09 17:23:25] [ 7/9] fold=1 PCA/20 f1=0.205 auc=0.673 acc=0.236 sens=0.872 train=107s
+[2026-04-09 17:44:00] [ 8/9] fold=2 PCA/20 f1=0.267 auc=0.828 acc=0.364 sens=1.000 train=107s
+[2026-04-09 18:07:58] [ 9/9] fold=3 PCA/20 f1=0.773 auc=0.871 acc=0.790 sens=0.885 train=340s
