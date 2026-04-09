@@ -74,15 +74,15 @@ Raw ENVI BIL cubes (uint16, 826 bands)
    Results in band_selection/
          |
          v
-6. Model training  [PENDING]
-   Random Forest + SVM
-   MSF + SVM (spectral-spatial graph)
-   HybridSN (3D+2D CNN)
-   Vision Transformer (ViT)
+6. Model training  [COMPLETE]
+   Random Forest + SVM (local CPU)
+   HybridSN 3D+2D CNN (Colab A100)
+   Vision Transformer (Colab A100)
          |
          v
-7. Evaluation  [PENDING]
+7. Evaluation  [COMPLETE]
    Leave-One-Patient-Out Cross Validation (LOPOCV)
+   186 total runs — 48 RF + 48 SVM + 45 HybridSN + 45 ViT
    Metrics: Accuracy, Sensitivity, Specificity, F1, AUC
 ```
 
@@ -92,29 +92,37 @@ Raw ENVI BIL cubes (uint16, 826 bands)
 
 ```
 hsi-cancer-detection/
-    inspect_dataset.py          Step 1: dataset inspection
-    preprocess.py               Step 2: preprocessing pipeline (v4)
-    sample_pixels.py            Step 3: pixel sampling for band selection
-    analyse_samples.py          Step 3: spectral analysis of sampled pixels
-    audit.py                    Integrity check on all preprocessed h5 files
-    fix_patient.py              Utility: fix patient attribute in h5 files
-    regenerate_summary.py       Regenerate dataset summary visuals
+    1_inspect_dataset.py        Step 1: dataset inspection
+    2_preprocess.py             Step 2: preprocessing pipeline
+    3a_sample_pixels.py         Step 3: pixel sampling
+    3b_analyse_samples.py       Step 3: spectral analysis
+    4a_random_forest.py         Step 4a: RF training (local)
+    4b_svm.py                   Step 4b: SVM training (local)
+    4c_hybridSN.ipynb           Step 4c: HybridSN source notebook (Colab)
+    4d_vit.ipynb                Step 4d: ViT source notebook (Colab)
+    5_compile_results.py        Step 5: cross-model comparison plots
+    plot_individual.py          Per-model detailed plots
     band_selection/
-        band_selection.ipynb    Step 3: Colab notebook (PCA, MI, LASSO)
-        bands_PCA.json          Selected band indices + wavelengths (PCA)
-        bands_MI.json           Selected band indices + wavelengths (MI)
-        bands_LASSO.json        Selected band indices + wavelengths (LASSO)
-        band_selection_PCA.png  Selected bands visualised on mean spectrum
-        band_selection_MI.png
-        band_selection_LASSO.png
-    dataset_summary/
-        class_distribution.png  ROI counts per patient and class
-        spectral_signatures.png Mean spectra: tumor vs normal (400-909 nm)
-        spectral_signatures.json Mean spectra data (JSON)
-        dataset_summary.txt     Full dataset statistics
-        rgb_preview.png         Pseudo-RGB tissue preview
-        preprocessing_summary.png Before/after preprocessing
-        sample_analysis/        Spectral discriminability plots and report
+        3c_band_selection.ipynb Colab notebook (PCA, MI, LASSO)
+        bands_PCA.json          Selected band indices + wavelengths
+        bands_MI.json
+        bands_LASSO.json
+    results/
+        RF/                     rf_v1_results.csv, summary, plots/
+        SVM/                    svm_v1_results.csv, summary, plots/
+        HybridSN/               hybridSN_v1_results.csv, summary, plots/
+        ViT/                    vit_v1_results.csv, summary, plots/
+        summary/                combined_results.csv, cross-model plots
+    notebooks/
+        completed/              Executed notebooks with full cell outputs
+    docs/
+        DECISIONS_01_session_planning.md
+        DECISIONS_02_locked_decisions.md
+        APRIL09_CHECKPOINT.md   Results analysis + paper decisions
+    scripts/
+        audit.py / audit.ipynb  Data integrity checks
+        powershell/             Drive verification and upload scripts
+    dataset_summary/            EDA plots and spectral signatures
     PROJECT_LOG.md              Full running project log
     .gitignore                  Excludes raw data, h5 files, model weights
 ```
@@ -123,54 +131,33 @@ hsi-cancer-detection/
 
 ## Current Results
 
-**Step 3 complete — Band selection done:**
+**All 4 models complete — 186 LOPOCV runs (April 2026)**
 
-| Method | n=4 | n=10 | n=20 | n=50 | n=100 |
-|--------|-----|------|------|------|-------|
-| MI | 594-615 nm | 594-619 nm | 594-625 nm | 586-630 nm | 572-644 nm |
-| LASSO | 597+788-805 nm | 569-600+788-821 nm | multi-region | multi-region | multi-region |
-| PCA | 544-558 nm | 544-659 nm | degrades* | degrades* | degrades* |
+### Model Comparison (best combo per model)
 
-*PCA selects consecutive correlated bands from n=20 onwards due to high inter-band
-correlation inherent to HSI (mean |r|=0.557). This is a documented limitation of
-unsupervised band selection and is reported as a finding.
+| Model | Best Combo | AUC | Accuracy | Sensitivity | Specificity | F1 |
+|-------|-----------|-----|----------|------------|------------|-----|
+| **HybridSN** | LASSO/100 | **0.918 ± 0.039** | 0.789 ± 0.106 | 0.574 ± 0.447 | 0.910 ± 0.075 | 0.699 ± 0.191 |
+| **SVM** | LASSO/100 | 0.873 ± 0.072 | **0.851 ± 0.047** | 0.626 ± 0.263 | **0.852 ± 0.178** | **0.777 ± 0.073** |
+| **RF** | LASSO/100 | 0.806 ± 0.076 | 0.797 ± 0.040 | 0.476 ± 0.411 | 0.856 ± 0.184 | 0.700 ± 0.071 |
+| **ViT** | MI/100 | 0.799 ± 0.099 | 0.619 ± 0.149 | **0.836 ± 0.091** | 0.613 ± 0.215 | 0.637 ± 0.105 |
 
-**Key band selection findings:**
-- MI consistently selects the Red 570-644 nm region (highest Cohen's d, mean=0.88)
-- LASSO selects diverse bands across Red (~597 nm), Red-edge (~685-700 nm), and NIR
-  (~788-832 nm) — the NIR selection aligns with Pike et al. (800-890 nm most informative)
-- Supervised methods (MI, LASSO) outperform unsupervised (PCA) for HSI band selection
+*Mean ± std across 3 LOPOCV folds*
 
-**Step 2 complete — Preprocessing verified:**
+### Key Findings
 
-All 134 ROIs preprocessed and validated:
+- **HybridSN achieves the highest peak AUC (0.918)** via LASSO band selection
+- **SVM is the most practical classifier** — best accuracy (0.851) and F1 (0.777)
+- **LASSO dominates for RF/SVM/HybridSN; ViT uniquely prefers MI** — suggesting
+  attention-based models benefit from distributed spectral information
+- **P2 sensitivity collapse** in RF/SVM/HybridSN: trained on P1+P3, these models
+  fail to detect tumours in P2 (sens < 0.26 at best combo). ViT avoids this collapse
+  (P2 sens = 0.837) through its attention mechanism, though at lower overall specificity
+- **Classical ML competitive with DL at n=3**: mean AUC across all combos —
+  SVM (0.764) ≈ HybridSN (0.762) ≈ ViT (0.757) > RF (0.739)
 
-| Patient | Tumor (T) | Normal (NT) | Total |
-|---------|-----------|-------------|-------|
-| P1 | 12 | 42 | 54 |
-| P2 | 12 | 21 | 33 |
-| P3 | 12 | 29 | 41 |
-| top-level | 3 | 3 | 6 |
-| **TOTAL** | **39** | **95** | **134** |
-
-**Key spectral finding:** The 520-560 nm absorption trough is the most discriminative
-spectral region between tumor and normal tissue, consistent with findings in
-Verbers et al. and Pike et al. Both classes converge to ~0.98-0.99 in NIR (>700 nm)
-after per-pixel normalization.
-
----
-
-## Planned Models
-
-| Model | Type | Expected F1 (LOPOCV) | Reference |
-|-------|------|----------------------|-----------|
-| Random Forest | Classical ML | ~0.80 | Simhadri et al. |
-| SVM | Classical ML | ~0.82 | - |
-| MSF + SVM | Spectral-spatial | ~0.87 | Pike et al. |
-| HybridSN | 3D+2D CNN | ~0.84 | Manni et al. |
-| Vision Transformer | ViT | ~0.86 | Cruz-Guerrero et al. |
-
-> Target: >85% F1 on Leave-One-Patient-Out cross validation
+> Full analysis: [docs/APRIL09_CHECKPOINT.md](docs/APRIL09_CHECKPOINT.md)
+> All results: [results/](results/) | Cross-model plots: [results/summary/](results/summary/)
 
 ---
 

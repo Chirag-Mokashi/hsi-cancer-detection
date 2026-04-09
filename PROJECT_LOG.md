@@ -548,15 +548,60 @@ Step 7: ablation studies - band count, patch size, class weighting
 
 ---
 
+## Step 4a — Random Forest (COMPLETE, April 2026)
+
+- 48 runs: 3 methods × 5 band counts × 3 folds + FullSpectrum × 3 folds
+- Best combo: LASSO/100b → AUC 0.806 ± 0.076
+- P2 sensitivity collapse: mean P2 sens = 0.181 (severe)
+- Results: results/RF/rf_v1_results.csv
+
+## Step 4b — SVM (COMPLETE, April 2026)
+
+- 48 runs: same grid as RF
+- Best combo: LASSO/100b → AUC 0.873 ± 0.072
+- Best practical classifier: accuracy 0.851, F1 0.777
+- P2 sensitivity collapse: mean P2 sens = 0.373 (moderate)
+- Results: results/SVM/svm_v1_results.csv
+
+## Step 4c — HybridSN 3D+2D CNN (COMPLETE, April 7-8 2026)
+
+- 45 runs: 3 methods × 5 band counts × 3 folds (FullSpectrum excluded for DL)
+- Trained on Google Colab A100, Focal Loss, patch_size=11, 50 epochs max
+- Best combo: LASSO/100b → AUC 0.918 ± 0.039 (highest peak AUC of all models)
+- P2 sensitivity collapse: mean P2 sens = 0.252 (severe), best-combo fold=2 sens=0.048
+- 5 tainted folds rerun (PCA/4 f1-3, PCA/10 f1-2) after duplicate P3 file fix
+- Results: results/HybridSN/hybridSN_v1_results.csv
+- Completed notebook: notebooks/completed/4c_hybridSN_completed.ipynb
+
+## Step 4d — Vision Transformer (COMPLETE, April 8-9 2026)
+
+- 45 runs: 3 methods × 5 band counts × 3 folds
+- Trained on Google Colab A100, Focal Loss, patch_size=11, token_size=4, 9 tokens
+- Best combo: MI/100b → AUC 0.799 ± 0.099 (only model preferring MI over LASSO)
+- P2 sensitivity: mean 0.765 — NO collapse (unique among all models)
+- Trade-off: high sensitivity (0.806) but low specificity (0.462) overall
+- 9 tainted folds + Drive quota issue delayed completion to April 9
+- Results: results/ViT/vit_v1_results.csv
+- Completed notebook: notebooks/completed/4d_vit_completed.ipynb
+
+## Step 5 — Compile Results (COMPLETE, April 9 2026)
+
+- 186 total runs across all 4 models
+- Cross-model plots: results/summary/ (model_comparison, auc_heatmap,
+  band_method_comparison, sens_spec_scatter)
+- Per-model plots: results/{RF,SVM,HybridSN,ViT}/plots/ (4 plots each)
+- Combined CSV: results/summary/combined_results.csv
+
+## April 9 Checkpoint
+
+- Full results analysis in docs/APRIL09_CHECKPOINT.md
+- 5 decisions pending: McNemar, extra plots, paper framing, venue, n=3 limitation
+- Key findings documented: HybridSN peak AUC, SVM practical winner, P2 collapse,
+  ViT/MI divergence, DL not clearly better than classical ML at n=3
+
 ## Next Actions
 
-1. Commit Step 3 complete
-2. Begin Step 4a: Random Forest + SVM (local, scikit-learn)
-   - Load preprocessed h5 files, slice bands using band_selection JSON files
-   - Train per band method (MI, LASSO, PCA) x band count (4,10,20,50,100)
-   - LOPOCV: train on 2 patients, test on 1 (top-level ROIs assigned to P1)
-   - Class weights: ~2.4x for tumor
-   - Metrics: Accuracy, Sensitivity, Specificity, F1 (macro), AUC
-3. Step 4b: MSF + SVM (local, custom Prim's algorithm)
-4. Step 4c: HybridSN CNN (Colab, T4 GPU, PyTorch)
-5. Step 4d: Vision Transformer (Colab, A100 GPU, PyTorch)
+1. Make decisions from APRIL09_CHECKPOINT.md
+2. Generate any additional plots decided (ROC curves, confusion matrices, etc.)
+3. Write paper draft (target April 10 minimum package, April 26 hard deadline)
+4. Future: expand to P4-P13 on HPC, add ACO, full ablation study
