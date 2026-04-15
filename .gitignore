@@ -45,3 +45,12 @@ Thumbs.db
 
 # Claude Code
 .claude/
+
+# Private documents (share manually, not via git)
+docs/
+notebooks/completed/
+
+# Unrelated local folders
+Sem1-NEU/
+rclone-v1.73.3-windows-amd64/
+.tmp.driveupload/

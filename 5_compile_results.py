@@ -299,9 +299,205 @@ print('Saved sens_spec_scatter.png')
 # NOTE: Wilcoxon signed-rank test was removed (Q4 decision, April 7 2026).
 # Reason: LOPOCV produces only n=3 folds, which is insufficient for a
 # meaningful signed-rank significance interpretation. Formal statistical
-# testing (McNemar's test) may be revisited in a later phase once all
-# results are available.
+# testing (McNemar's test) was also skipped (Decision 1, April 14 2026):
+# n=3 LOPOCV folds are insufficient for robust hypothesis testing.
+# Results are framed as hypothesis-generating/exploratory.
 # ============================================================
+
+
+# ============================================================
+# HELPERS for extra plots (April 14 2026)
+# ============================================================
+
+# Best combo per model (locked decisions April 14 2026)
+BEST_COMBO = {
+    'RF':       ('LASSO', '100'),
+    'SVM':      ('LASSO', '100'),
+    'HybridSN': ('LASSO', '100'),
+    'ViT':      ('MI',    '100'),
+}
+
+MODEL_COLORS = {
+    'RF':       'tab:blue',
+    'SVM':      'tab:orange',
+    'HybridSN': 'tab:green',
+    'ViT':      'tab:red',
+}
+
+PATIENT_LABELS = {1: 'P1', 2: 'P2', 3: 'P3'}
+
+
+def get_best_combo_folds(model):
+    """Return list of 3 rows (fold 1/2/3) for a model's best combo, sorted by fold."""
+    method, n_bands = BEST_COMBO[model]
+    rows_out = []
+    for row in model_rows[model]:
+        if row.get('method') == method and row.get('n_bands') == str(n_bands):
+            try:
+                fold = int(row.get('fold', 0))
+                if fold in (1, 2, 3):
+                    rows_out.append((fold, row))
+            except ValueError:
+                pass
+    rows_out.sort(key=lambda x: x[0])
+    return rows_out
+
+
+# ============================================================
+# PLOT 5: per_patient_sens_spec.png
+# Per-patient (per-fold) sensitivity and specificity at best combo
+# 4 subplots, one per model; highlights P2 collapse
+# ============================================================
+
+fig5, axes5 = plt.subplots(1, len(models), figsize=(14, 4), sharey=True)
+bar_width = 0.35
+patient_x = np.array([0, 1, 2])
+sens_color = '#4C72B0'
+spec_color = '#DD8452'
+p2_edge_color = '#C00000'
+
+for ax, model in zip(axes5, models):
+    fold_rows = get_best_combo_folds(model)
+    if not fold_rows:
+        ax.set_title('{}\n(no data)'.format(model))
+        continue
+
+    sens_vals = []
+    spec_vals = []
+    for fold, row in fold_rows:
+        sens_vals.append(float(row.get('sensitivity', float('nan'))))
+        spec_vals.append(float(row.get('specificity', float('nan'))))
+
+    bars_sens = ax.bar(patient_x - bar_width / 2, sens_vals, bar_width,
+                       label='Sensitivity', color=sens_color, alpha=0.85)
+    bars_spec = ax.bar(patient_x + bar_width / 2, spec_vals, bar_width,
+                       label='Specificity', color=spec_color, alpha=0.85)
+
+    # Highlight P2 (index 1) with red edge
+    for bars in (bars_sens, bars_spec):
+        bars[1].set_edgecolor(p2_edge_color)
+        bars[1].set_linewidth(2.0)
+
+    ax.axhline(0.5, color='grey', linestyle='--', linewidth=0.8, alpha=0.6)
+    ax.set_xticks(patient_x)
+    ax.set_xticklabels(['P1\n(fold 1)', 'P2\n(fold 2)', 'P3\n(fold 3)'])
+    ax.set_ylim(0, 1.08)
+    method, nb = BEST_COMBO[model]
+    ax.set_title('{}\n({}/{})'.format(model, method, nb))
+    ax.grid(axis='y', alpha=0.3)
+    if ax == axes5[0]:
+        ax.set_ylabel('Score')
+        ax.legend(fontsize=8)
+
+    # Annotate P2 column with "collapse" label for models with P2 sens < 0.5
+    if len(sens_vals) >= 2 and sens_vals[1] < 0.5:
+        ax.annotate('collapse', xy=(0, sens_vals[1]),
+                    xytext=(0, min(sens_vals[1] + 0.12, 0.95)),
+                    ha='center', fontsize=7, color=p2_edge_color,
+                    arrowprops=dict(arrowstyle='->', color=p2_edge_color, lw=1.2))
+
+fig5.suptitle('Per-Patient Sensitivity & Specificity at Best Combo\n'
+              '(red border = P2, severe collapse in RF/SVM/HybridSN)')
+fig5.tight_layout()
+fig5.savefig(SUMMARY_DIR / 'per_patient_sens_spec.png', dpi=150)
+plt.close(fig5)
+print('Saved per_patient_sens_spec.png')
+
+
+# ============================================================
+# PLOT 6: per_patient_auc_bar.png
+# Grouped bar chart: AUC per patient (fold) for all 4 models at best combo
+# Directly visualises P2 collapse across all models
+# ============================================================
+
+fig6, ax6 = plt.subplots(figsize=(9, 5))
+n_models = len(models)
+group_width = 0.8
+bar_w = group_width / n_models
+patient_positions = np.array([0, 1, 2])  # P1, P2, P3
+
+for i, model in enumerate(models):
+    fold_rows = get_best_combo_folds(model)
+    auc_vals = [float('nan'), float('nan'), float('nan')]
+    for fold, row in fold_rows:
+        idx = fold - 1
+        try:
+            auc_vals[idx] = float(row.get('auc', float('nan')))
+        except ValueError:
+            pass
+
+    offset = (i - (n_models - 1) / 2.0) * bar_w
+    xpos = patient_positions + offset
+    ax6.bar(xpos, auc_vals, bar_w, label=model,
+            color=MODEL_COLORS[model], alpha=0.85, edgecolor='white', linewidth=0.5)
+
+    # Annotate each bar with AUC value
+    for x, val in zip(xpos, auc_vals):
+        if not np.isnan(val):
+            ax6.text(x, val + 0.01, '{:.3f}'.format(val),
+                     ha='center', va='bottom', fontsize=6.5, rotation=90)
+
+ax6.axhline(0.5, color='grey', linestyle='--', linewidth=0.8, alpha=0.7, label='Chance (0.5)')
+ax6.set_xticks(patient_positions)
+ax6.set_xticklabels(['P1 (fold 1)', 'P2 (fold 2)', 'P3 (fold 3)'], fontsize=10)
+ax6.set_ylabel('AUC')
+ax6.set_ylim(0, 1.15)
+ax6.set_title('Per-Patient AUC at Best Combo per Model\n'
+              '(fold 2 = P2 held out; collapse visible in RF/SVM/HybridSN)')
+
+# Shade P2 column to draw attention
+ax6.axvspan(0.6, 1.4, alpha=0.07, color='red', label='P2 patient')
+
+ax6.legend(fontsize=8, loc='lower right')
+ax6.grid(axis='y', alpha=0.3)
+fig6.tight_layout()
+fig6.savefig(SUMMARY_DIR / 'per_patient_auc_bar.png', dpi=150)
+plt.close(fig6)
+print('Saved per_patient_auc_bar.png')
+
+
+# ============================================================
+# PLOT 7: auc_vs_bands_mean.png
+# AUC vs band count (mean across all 3 methods) per model
+# Shows "more bands = better, diminishing returns after 50"
+# ============================================================
+
+fig7, ax7 = plt.subplots(figsize=(7, 5))
+
+for model in models:
+    mean_aucs = []
+    for nb in band_counts:
+        vals = []
+        for method in ['PCA', 'MI', 'LASSO']:
+            v = mean_metric(model, method, nb, 'auc')
+            if not np.isnan(v):
+                vals.append(v)
+        mean_aucs.append(np.mean(vals) if vals else float('nan'))
+
+    ax7.plot(band_counts, mean_aucs, marker='o', label=model,
+             color=MODEL_COLORS[model], linewidth=2)
+
+    # Annotate each point
+    for nb, val in zip(band_counts, mean_aucs):
+        if not np.isnan(val):
+            ax7.annotate('{:.3f}'.format(val), (nb, val),
+                         textcoords='offset points', xytext=(0, 6),
+                         ha='center', fontsize=7)
+
+ax7.axvline(50, color='grey', linestyle=':', linewidth=1.0, alpha=0.8,
+            label='50 bands (diminishing returns)')
+ax7.set_xlabel('Band count')
+ax7.set_ylabel('Mean AUC (averaged across PCA/MI/LASSO)')
+ax7.set_title('AUC vs Band Count -- All Models\n'
+              '(mean across PCA/MI/LASSO band selection methods)')
+ax7.set_xticks(band_counts)
+ax7.set_ylim(0.5, 0.95)
+ax7.legend(fontsize=9)
+ax7.grid(alpha=0.3)
+fig7.tight_layout()
+fig7.savefig(SUMMARY_DIR / 'auc_vs_bands_mean.png', dpi=150)
+plt.close(fig7)
+print('Saved auc_vs_bands_mean.png')
 
 
 # ============================================================
@@ -314,3 +510,6 @@ print('  model_comparison.png')
 print('  auc_heatmap.png')
 print('  band_method_comparison.png')
 print('  sens_spec_scatter.png')
+print('  per_patient_sens_spec.png')
+print('  per_patient_auc_bar.png')
+print('  auc_vs_bands_mean.png')
