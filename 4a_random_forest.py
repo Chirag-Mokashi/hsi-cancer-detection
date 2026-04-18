@@ -21,10 +21,10 @@ from utils.rf_svm_loader import get_fold_data
 
 # ---- Config ----
 MODEL          = 'RF'
-VERSION        = 'v1'
+VERSION        = 'v2'
 N_ESTIMATORS   = 500
 RANDOM_SEED    = 42
-RESULTS_DIR    = Path('results/RF')
+RESULTS_DIR    = Path('results/RF_v2')
 RESULTS_CSV    = RESULTS_DIR / 'rf_{}_results.csv'.format(VERSION)
 SUMMARY_CSV    = RESULTS_DIR / 'rf_{}_summary.csv'.format(VERSION)
 CSV_COLS       = ['model', 'method', 'n_bands', 'fold',
