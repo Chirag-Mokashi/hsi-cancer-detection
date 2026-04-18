@@ -7,8 +7,10 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from collections import defaultdict
 
-PREPROCESSED = Path(r"C:\Users\mokas\OneDrive\Desktop\HSI\preprocessed")
-SUMMARY_DIR  = Path(r"C:\Users\mokas\OneDrive\Desktop\HSI\dataset_summary")
+from utils.config import DATA_ROOT, PREPROCESSED_DIR
+
+PREPROCESSED = PREPROCESSED_DIR
+SUMMARY_DIR  = DATA_ROOT / "dataset_summary"
 SUMMARY_DIR.mkdir(exist_ok=True)
 
 files = sorted(PREPROCESSED.glob("*.h5"))
