@@ -6,7 +6,7 @@
 #   1. File opens without error
 #   2. Has cube, wavelengths datasets and label, patient attributes
 #   3. Shape is exactly (800, 1004, 699)
-#   4. Values in [0, 1] - checked on 3 random patches
+#   4. Values in [0, 1] - checked on 3 random patches (out-of-range logged, not clipped)
 #   5. No NaN or Inf values
 #   6. Mean is between 0.3 and 0.95 (sanity check on calibration)
 #   7. File size is at least 10 MB (not empty/truncated)
@@ -225,12 +225,16 @@ def load_reference_bil(bin_path, hdr):
     return data
 
 
-def calibrate(raw, dark, white):
+def calibrate(raw, dark, white, roi_name=''):
     denom = white - dark
     denom = np.where(denom <= 0, 1e-6, denom)
     raw -= dark[np.newaxis, :, :]
     raw /= denom[np.newaxis, :, :]
-    np.clip(raw, 0.0, 1.0, out=raw)
+    n_out_of_range = int(((raw < 0) | (raw > 1)).sum())
+    n_total = raw.size
+    if n_total > 0 and n_out_of_range / n_total > 0.01:
+        pct = 100.0 * n_out_of_range / n_total
+        print("  WARNING: {}: {:.2f}% voxels out of [0,1] reflectance range".format(roi_name, pct))
     return raw
 
 
@@ -394,7 +398,7 @@ for i, roi in enumerate(rois):
             dark  = dark[:, :bands]
             white = white[:, :bands]
 
-        cube = calibrate(raw, dark, white)
+        cube = calibrate(raw, dark, white, roi_name=roi["name"])
         del raw, dark, white
 
         cube    = cube[:, :, keep_idx]
