@@ -20,8 +20,7 @@ print(f"Found {total} h5 files\n")
 # ----------------------------------------------------------------
 # 1. Collect per-patient counts + spectral signatures
 # ----------------------------------------------------------------
-patients = ["P1", "P2", "P3", "top-level"]
-counts = {p: {"T": 0, "NT": 0} for p in patients}
+counts = defaultdict(lambda: {"T": 0, "NT": 0})
 
 tumor_spectra  = []
 normal_spectra = []
@@ -48,6 +47,7 @@ for i, f in enumerate(files, 1):
         else:
             normal_spectra.append(mean_spectrum)
 
+patients    = sorted(counts.keys())
 tumor_mean  = np.mean(tumor_spectra,  axis=0)
 normal_mean = np.mean(normal_spectra, axis=0)
 
