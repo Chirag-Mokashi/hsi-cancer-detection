@@ -6,20 +6,23 @@
 # Imports shared LOPOCV core from data_loader.py.
 # DO NOT redefine get_lopocv_folds() here - always import from data_loader.
 
-from utils.data_loader import load_patient_data, PIXELS_PER_ROI
+from utils.data_loader import (load_patient_data, load_patient_data_deterministic,
+                               PIXELS_PER_ROI)
 
 
 def get_fold_data(fold_dict, band_indices, pixels_per_roi=PIXELS_PER_ROI, seed=42):
     """
     Load flat pixel data for one LOPOCV fold.
 
+    Train split uses random block sampling (reproducible via seed).
+    Test split uses deterministic evenly-spaced sampling (no RNG, seed ignored).
+
     Parameters
     ----------
     fold_dict    : dict from get_lopocv_folds() with 'train_files' / 'test_files'
     band_indices : list of int band indices to select
     pixels_per_roi: int (default 500)
-    seed         : int random seed for train; seed+1 used for test to ensure
-                   different random blocks from the same files
+    seed         : int random seed for train split only
 
     Returns
     -------
@@ -32,8 +35,8 @@ def get_fold_data(fold_dict, band_indices, pixels_per_roi=PIXELS_PER_ROI, seed=4
         fold_dict['train_files'], band_indices,
         pixels_per_roi=pixels_per_roi, seed=seed
     )
-    X_test, y_test = load_patient_data(
+    X_test, y_test = load_patient_data_deterministic(
         fold_dict['test_files'], band_indices,
-        pixels_per_roi=pixels_per_roi, seed=seed + 1
+        pixels_per_roi=pixels_per_roi
     )
     return X_train, y_train, X_test, y_test

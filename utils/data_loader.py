@@ -186,6 +186,56 @@ def load_patient_data(h5_paths, band_indices, pixels_per_roi=PIXELS_PER_ROI, see
 
 
 # ---------------------------------------------------------------------------
+# Deterministic data loading (test folds only)
+# ---------------------------------------------------------------------------
+
+def load_patient_data_deterministic(h5_paths, band_indices, pixels_per_roi=PIXELS_PER_ROI):
+    """
+    Sample a FIXED pixel grid from each HDF5 file — no RNG.
+
+    Reads just enough rows from the top of the cube to supply pixels_per_roi pixels,
+    then picks evenly spaced indices via linspace. Result is byte-for-byte identical
+    across runs and independent of any seed.
+
+    Parameters
+    ----------
+    h5_paths     : list of Path objects
+    band_indices : list of int
+    pixels_per_roi: int (default 500)
+
+    Returns
+    -------
+    X : (N, n_bands) float32
+    y : (N,) int8   0=NT  1=T
+    """
+    all_X = []
+    all_y = []
+
+    for fpath in h5_paths:
+        with h5py.File(fpath, 'r') as f:
+            n_rows, n_cols, n_bands_full = f['cube'].shape
+            label_str = str(f.attrs['label'])
+            label_int = np.int8(1 if label_str == 'T' else 0)
+
+            n_rows_needed = max(1, -(-pixels_per_roi // n_cols))  # ceiling div, no RNG
+            block = f['cube'][0:n_rows_needed, :, :]
+            block = block[:, :, band_indices]
+            flat  = block.reshape(-1, len(band_indices))
+
+        n_avail  = flat.shape[0]
+        n_sample = min(pixels_per_roi, n_avail)
+        chosen   = np.round(np.linspace(0, n_avail - 1, n_sample)).astype(np.intp)
+        sampled  = flat[chosen].astype(np.float32)
+
+        all_X.append(sampled)
+        all_y.append(np.full(n_sample, label_int, dtype=np.int8))
+
+    X = np.vstack(all_X)
+    y = np.concatenate(all_y)
+    return X, y
+
+
+# ---------------------------------------------------------------------------
 # Class weights
 # ---------------------------------------------------------------------------
 
