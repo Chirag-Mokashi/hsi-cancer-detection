@@ -52,6 +52,8 @@ def get_lopocv_folds():
         prefix = f.stem.split('_')[0]
         # Assign non-standard prefixes (e.g. 'top-level') to TOPLEVEL_PATIENT
         if not (prefix.startswith('P') and prefix[1:].isdigit()):
+            print("WARNING: file {} has unrecognised prefix '{}', treating as {} "
+                  "(provenance unverified from TCIA)".format(f.name, prefix, TOPLEVEL_PATIENT))
             prefix = TOPLEVEL_PATIENT
         if prefix not in groups:
             groups[prefix] = []

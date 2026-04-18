@@ -213,6 +213,14 @@ which is the realistic deployment scenario.
 **Class imbalance:** T/NT ratio = 0.41. All models use class weights (~2.4x for tumor)
 to prevent bias toward the majority normal class.
 
+> **Provenance caveat:** A subset of ROI files in the TCIA download lacked a patient
+> sub-folder (`P1/`, `P2/`, `P3/`), appearing at the top level of the archive. These
+> "top-level" ROIs are assumed to belong to patient P1 based on TCIA archive structure,
+> but their exact patient provenance is **unverified**. All 134 preprocessed files have
+> been patched with a `patient` attribute (via `scripts/fix_patient.py`) and pass full
+> audit checks, but readers should note this assumption as a potential threat to validity
+> in the LOPOCV fold assignments.
+
 ---
 
 ## References
