@@ -9,6 +9,7 @@
 # due to SVM O(n^2) training cost. Estimated total: 1.5-3 hours.
 
 import csv
+import subprocess
 import time
 from pathlib import Path
 
@@ -32,7 +33,8 @@ RESULTS_CSV = RESULTS_DIR / 'svm_{}_results.csv'.format(VERSION)
 SUMMARY_CSV = RESULTS_DIR / 'svm_{}_summary.csv'.format(VERSION)
 CSV_COLS    = ['model', 'method', 'n_bands', 'fold',
                'accuracy', 'sensitivity', 'specificity', 'f1', 'auc',
-               'train_time_sec', 'inference_time_per_image_ms']
+               'train_time_sec', 'inference_time_per_image_ms',
+               'git_sha', 'seed', 'code_version']
 METRIC_COLS = ['accuracy', 'sensitivity', 'specificity', 'f1', 'auc',
                'train_time_sec', 'inference_time_per_image_ms']
 # ----------------
@@ -147,6 +149,14 @@ def main():
             except ValueError:
                 auc_val = float('nan')
 
+            try:
+                git_sha = subprocess.check_output(
+                    ['git', 'rev-parse', '--short', 'HEAD'],
+                    stderr=subprocess.DEVNULL
+                ).decode().strip()
+            except Exception:
+                git_sha = 'unknown'
+
             row = {
                 'model':                       MODEL,
                 'method':                      method,
@@ -159,6 +169,9 @@ def main():
                 'auc':                         auc_val,
                 'train_time_sec':              round(train_time_sec, 3),
                 'inference_time_per_image_ms': round(inf_ms_per_image, 6),
+                'git_sha':                     git_sha,
+                'seed':                        RANDOM_SEED,
+                'code_version':                '{}-{}-{}'.format(MODEL, VERSION, git_sha),
             }
             append_row(RESULTS_CSV, row)
 

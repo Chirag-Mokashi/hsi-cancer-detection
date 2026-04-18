@@ -67,15 +67,18 @@ print('\nTotal rows: {}'.format(len(all_rows)))
 # WRITE COMBINED CSV
 # ============================================================
 all_cols = list(all_rows[0].keys())
-# Ensure token_size col exists for ViT rows; fill blank for others
+# Ensure optional cols exist; fill blank for rows that don't have them
 for row in all_rows:
     row.setdefault('token_size', '')
     row.setdefault('patch_size', '')
     row.setdefault('loss_fn', '')
+    row.setdefault('git_sha', '')
+    row.setdefault('seed', '')
+    row.setdefault('code_version', '')
 
 # Canonical column order
 COMBINED_COLS = ['model', 'method', 'n_bands', 'patch_size', 'token_size',
-                 'fold', 'loss_fn'] + METRICS + TIMING_COLS
+                 'fold', 'loss_fn'] + METRICS + TIMING_COLS + ['git_sha', 'seed', 'code_version']
 
 with open(COMBINED_CSV, 'w', newline='') as fh:
     writer = csv.DictWriter(fh, fieldnames=COMBINED_COLS, extrasaction='ignore')
