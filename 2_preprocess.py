@@ -19,13 +19,24 @@ OUT_FOLDER = r"C:\Users\mokas\OneDrive\Desktop\HSI\preprocessed"
 MAX_WAVELENGTH_NM    = 909.0
 AUTO_DELETE_PATIENTS = ["P2", "P3", "top-level"]
 
+# Safety flag — must be True (via --enable-delete) for any raw deletion to proceed.
+# Without the flag the script prints [dry-run] and skips all deletes.
+ENABLE_AUTO_DELETE = False
+
 import re
 import sys
 import time
 import shutil
+import argparse
 import numpy as np
 from pathlib import Path
 from collections import defaultdict
+
+_p = argparse.ArgumentParser(add_help=False)
+_p.add_argument('--enable-delete', action='store_true')
+_args, _ = _p.parse_known_args()
+if _args.enable_delete:
+    ENABLE_AUTO_DELETE = True
 
 try:
     import h5py
@@ -112,6 +123,17 @@ def verify_h5_strict(path):
                 if mean_val < 0.1 or mean_val > 1.0:
                     return False, "patch {} mean {:.3f} is outside expected range".format(
                         j, mean_val)
+
+            # Check 7: full-cube NaN/Inf scan in 50-row chunks (keeps memory low)
+            n_rows_full = hf["cube"].shape[0]
+            chunk_size  = 50
+            for row_start in range(0, n_rows_full, chunk_size):
+                row_end = min(row_start + chunk_size, n_rows_full)
+                chunk   = np.array(hf["cube"][row_start:row_end, :, :], dtype=np.float32)
+                if np.any(np.isnan(chunk)):
+                    return False, "NaN found in rows {}-{}".format(row_start, row_end)
+                if np.any(np.isinf(chunk)):
+                    return False, "Inf found in rows {}-{}".format(row_start, row_end)
 
         return True, "OK"
 
@@ -266,8 +288,9 @@ def check_free_space_gb():
 
 def try_delete_patient_raw(patient, rois):
     """
-    Delete patient raw folder ONLY after strict verification of all their ROIs.
-    Prints a per-ROI verification report before deleting.
+    Move patient raw folder to _trash/ ONLY after strict verification of all ROIs.
+    Requires ENABLE_AUTO_DELETE=True (set via --enable-delete flag).
+    Without the flag, prints [dry-run] messages and skips all moves.
     """
     if patient not in AUTO_DELETE_PATIENTS:
         return False
@@ -303,23 +326,36 @@ def try_delete_patient_raw(patient, rois):
         print("  {} ROI(s) failed verification - keeping raw folder".format(fail_count))
         return False
 
-    # All passed - safe to delete
     print("  All {} ROIs verified OK".format(total))
 
+    if not ENABLE_AUTO_DELETE:
+        if patient == "top-level":
+            for roi in patient_rois:
+                print("  [dry-run] would move {} to _trash/".format(roi["path"].name))
+        else:
+            print("  [dry-run] would move {} to _trash/".format(patient))
+        print("  (re-run with --enable-delete to apply)")
+        return False
+
+    trash_dir = root / "_trash"
+    trash_dir.mkdir(exist_ok=True)
+
     if patient == "top-level":
-        deleted_any = False
+        moved_any = False
         for roi in patient_rois:
             raw_folder = roi["path"]
             if raw_folder.exists():
-                shutil.rmtree(str(raw_folder))
-                print("  [DELETED] " + raw_folder.name)
-                deleted_any = True
-        return deleted_any
+                dest = trash_dir / raw_folder.name
+                shutil.move(str(raw_folder), str(dest))
+                print("  [MOVED to _trash] " + raw_folder.name)
+                moved_any = True
+        return moved_any
     else:
         patient_folder = root / patient
         if patient_folder.exists():
-            shutil.rmtree(str(patient_folder))
-            print("  [DELETED] raw folder: " + patient)
+            dest = trash_dir / patient
+            shutil.move(str(patient_folder), str(dest))
+            print("  [MOVED to _trash] raw folder: " + patient)
             return True
 
     return False
