@@ -162,7 +162,7 @@ lines = [
     "---------------------",
     "Step 1: Reflectance calibration",
     "  Formula: Reflection = (Raw - Dark) / (White - Dark)",
-    "  Values clipped to [0.0, 1.0]",
+    "  Out-of-range values logged but not clipped (see 2_preprocess.py)",
     "Step 2: Band selection",
     "  Removed bands above 909 nm (noisy region)",
     "  826 bands -> 699 bands kept (400.5 nm to 909.0 nm)",
