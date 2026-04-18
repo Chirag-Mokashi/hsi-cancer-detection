@@ -103,7 +103,10 @@ def plot_roc_overlay(results_dir, model_name, combo_label):
             continue
 
         fpr, tpr, _ = roc_curve(y_true, y_proba)
-        auc = roc_auc_score(y_true, y_proba)
+        try:
+            auc = roc_auc_score(y_true, y_proba)
+        except ValueError:
+            auc = float('nan')
         label = 'Fold {} ({} held out), AUC={:.3f}'.format(
             fold, PATIENT_MAP[fold], auc)
         ax.plot(fpr, tpr, color=FOLD_COLORS[fold], linewidth=2, label=label)
@@ -176,7 +179,10 @@ def run_rf_roc():
         train_sec = time.time() - t1
 
         proba = clf.predict_proba(X_te)[:, 1]
-        auc = roc_auc_score(y_te, proba)
+        try:
+            auc = roc_auc_score(y_te, proba)
+        except ValueError:
+            auc = float('nan')
         print('  fold={} done  train={:.1f}s  AUC={:.4f}'.format(
             fold_num, train_sec, auc))
         save_fold_predictions(RF_DIR, fold_num, y_te, proba)
@@ -235,7 +241,10 @@ def run_svm_roc():
         train_sec = time.time() - t1
 
         proba = clf.predict_proba(X_te_sc)[:, 1]
-        auc = roc_auc_score(y_te, proba)
+        try:
+            auc = roc_auc_score(y_te, proba)
+        except ValueError:
+            auc = float('nan')
         print('  fold={} done  train={:.1f}s  AUC={:.4f}'.format(
             fold_num, train_sec, auc))
         save_fold_predictions(SVM_DIR, fold_num, y_te, proba)
