@@ -1,0 +1,286 @@
+WARNING: file top-level_ROI_01_C10_T.h5 has unrecognised prefix 'top-level', treating as P1 (provenance unverified from TCIA)
+WARNING: file top-level_ROI_01_C11_T.h5 has unrecognised prefix 'top-level', treating as P1 (provenance unverified from TCIA)
+WARNING: file top-level_ROI_01_C12_T.h5 has unrecognised prefix 'top-level', treating as P1 (provenance unverified from TCIA)
+WARNING: file top-level_ROI_02_C10_NT.h5 has unrecognised prefix 'top-level', treating as P1 (provenance unverified from TCIA)
+WARNING: file top-level_ROI_02_C11_NT.h5 has unrecognised prefix 'top-level', treating as P1 (provenance unverified from TCIA)
+WARNING: file top-level_ROI_02_C12_NT.h5 has unrecognised prefix 'top-level', treating as P1 (provenance unverified from TCIA)
+RF v1  |  16 combos x 3 folds = 48 runs
+Results -> results\RF_v2\rf_v2_results.csv
+
+Combos:   0%|          | 0/16 [00:00<?, ?combo/s]Combos:   0%|          | 0/16 [00:00<?, ?combo/s, method=PCA, bands=4]
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                      
+                                                        [ACombos:   0%|          | 0/16 [04:20<?, ?combo/s, method=PCA, bands=4]
+  Folds:   0%|          | 0/3 [04:20<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:20<08:41, 260.51s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:20<08:41, 260.51s/fold, fold=2][A                                                                      
+                                                                 [ACombos:   0%|          | 0/16 [08:43<?, ?combo/s, method=PCA, bands=4]
+  Folds:  33%|###3      | 1/3 [08:43<08:41, 260.51s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:43<04:22, 262.06s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:43<04:22, 262.06s/fold, fold=3][A                                                                      
+                                                                 [ACombos:   0%|          | 0/16 [13:02<?, ?combo/s, method=PCA, bands=4]
+  Folds:  67%|######6   | 2/3 [13:02<04:22, 262.06s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [13:02<00:00, 260.64s/fold, fold=3][A
+                                                                 [ACombos:   6%|6         | 1/16 [13:02<3:15:39, 782.61s/combo, method=PCA, bands=4]Combos:   6%|6         | 1/16 [13:02<3:15:39, 782.61s/combo, method=PCA, bands=10]  fold=1 PCA/  4  acc=0.626 sens=0.570 spec=0.645 f1=0.577 auc=0.625  train=3.4s inf=0.0158ms/img
+  fold=2 PCA/  4  acc=0.695 sens=0.241 spec=0.955 f1=0.583 auc=0.668  train=5.1s inf=0.0307ms/img
+  fold=3 PCA/  4  acc=0.744 sens=0.198 spec=0.970 f1=0.578 auc=0.784  train=5.1s inf=0.0207ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                  
+                                                        [ACombos:   6%|6         | 1/16 [17:19<3:15:39, 782.61s/combo, method=PCA, bands=10]
+  Folds:   0%|          | 0/3 [04:17<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:17<08:34, 257.28s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:17<08:34, 257.28s/fold, fold=2][A                                                                                  
+                                                                 [ACombos:   6%|6         | 1/16 [21:40<3:15:39, 782.61s/combo, method=PCA, bands=10]
+  Folds:  33%|###3      | 1/3 [08:37<08:34, 257.28s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:37<04:19, 259.10s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:37<04:19, 259.10s/fold, fold=3][A                                                                                  
+                                                                 [ACombos:   6%|6         | 1/16 [26:01<3:15:39, 782.61s/combo, method=PCA, bands=10]
+  Folds:  67%|######6   | 2/3 [12:58<04:19, 259.10s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [12:58<00:00, 259.92s/fold, fold=3][A
+                                                                 [ACombos:  12%|#2        | 2/16 [26:01<3:02:03, 780.22s/combo, method=PCA, bands=10]Combos:  12%|#2        | 2/16 [26:01<3:02:03, 780.22s/combo, method=PCA, bands=20]  fold=1 PCA/ 10  acc=0.582 sens=0.709 spec=0.540 f1=0.559 auc=0.649  train=4.5s inf=0.0162ms/img
+  fold=2 PCA/ 10  acc=0.686 sens=0.196 spec=0.966 f1=0.554 auc=0.686  train=6.2s inf=0.0240ms/img
+  fold=3 PCA/ 10  acc=0.791 sens=0.375 spec=0.962 f1=0.689 auc=0.871  train=6.7s inf=0.0219ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                  
+                                                        [ACombos:  12%|#2        | 2/16 [30:18<3:02:03, 780.22s/combo, method=PCA, bands=20]
+  Folds:   0%|          | 0/3 [04:17<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:17<08:34, 257.45s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:17<08:34, 257.45s/fold, fold=2][A                                                                                  
+                                                                 [ACombos:  12%|#2        | 2/16 [34:38<3:02:03, 780.22s/combo, method=PCA, bands=20]
+  Folds:  33%|###3      | 1/3 [08:37<08:34, 257.45s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:37<04:19, 259.06s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:37<04:19, 259.06s/fold, fold=3][A                                                                                  
+                                                                 [ACombos:  12%|#2        | 2/16 [38:59<3:02:03, 780.22s/combo, method=PCA, bands=20]
+  Folds:  67%|######6   | 2/3 [12:58<04:19, 259.06s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [12:58<00:00, 259.96s/fold, fold=3][A
+                                                                 [ACombos:  19%|#8        | 3/16 [38:59<2:48:53, 779.51s/combo, method=PCA, bands=20]Combos:  19%|#8        | 3/16 [38:59<2:48:53, 779.51s/combo, method=PCA, bands=50]  fold=1 PCA/ 20  acc=0.605 sens=0.723 spec=0.566 f1=0.581 auc=0.672  train=5.8s inf=0.0177ms/img
+  fold=2 PCA/ 20  acc=0.675 sens=0.162 spec=0.969 f1=0.529 auc=0.728  train=7.6s inf=0.0263ms/img
+  fold=3 PCA/ 20  acc=0.798 sens=0.380 spec=0.972 f1=0.698 auc=0.886  train=8.2s inf=0.0256ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                  
+                                                        [ACombos:  19%|#8        | 3/16 [43:22<2:48:53, 779.51s/combo, method=PCA, bands=50]
+  Folds:   0%|          | 0/3 [04:22<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:22<08:45, 262.71s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:22<08:45, 262.71s/fold, fold=2][A                                                                                  
+                                                                 [ACombos:  19%|#8        | 3/16 [47:50<2:48:53, 779.51s/combo, method=PCA, bands=50]
+  Folds:  33%|###3      | 1/3 [08:50<08:45, 262.71s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:50<04:25, 265.96s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:50<04:25, 265.96s/fold, fold=3][A                                                                                  
+                                                                 [ACombos:  19%|#8        | 3/16 [52:18<2:48:53, 779.51s/combo, method=PCA, bands=50]
+  Folds:  67%|######6   | 2/3 [13:18<04:25, 265.96s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [13:18<00:00, 266.83s/fold, fold=3][A
+                                                                 [ACombos:  25%|##5       | 4/16 [52:18<2:37:25, 787.13s/combo, method=PCA, bands=50]Combos:  25%|##5       | 4/16 [52:18<2:37:25, 787.13s/combo, method=PCA, bands=100]  fold=1 PCA/ 50  acc=0.637 sens=0.716 spec=0.611 f1=0.607 auc=0.689  train=10.6s inf=0.0241ms/img
+  fold=2 PCA/ 50  acc=0.644 sens=0.069 spec=0.973 f1=0.450 auc=0.728  train=14.1s inf=0.0226ms/img
+  fold=3 PCA/ 50  acc=0.788 sens=0.333 spec=0.977 f1=0.673 auc=0.902  train=14.6s inf=0.0221ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                   
+                                                        [ACombos:  25%|##5       | 4/16 [56:49<2:37:25, 787.13s/combo, method=PCA, bands=100]
+  Folds:   0%|          | 0/3 [04:30<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:30<09:01, 270.66s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:30<09:01, 270.66s/fold, fold=2][A                                                                                   
+                                                                 [ACombos:  25%|##5       | 4/16 [1:01:27<2:37:25, 787.13s/combo, method=PCA, bands=100]
+  Folds:  33%|###3      | 1/3 [09:09<09:01, 270.66s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [09:09<04:35, 275.23s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [09:09<04:35, 275.23s/fold, fold=3][A                                                                                     
+                                                                 [ACombos:  25%|##5       | 4/16 [1:06:06<2:37:25, 787.13s/combo, method=PCA, bands=100]
+  Folds:  67%|######6   | 2/3 [13:47<04:35, 275.23s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [13:47<00:00, 276.74s/fold, fold=3][A
+                                                                 [ACombos:  31%|###1      | 5/16 [1:06:06<2:26:59, 801.74s/combo, method=PCA, bands=100]Combos:  31%|###1      | 5/16 [1:06:06<2:26:59, 801.74s/combo, method=MI, bands=4]     fold=1 PCA/100  acc=0.655 sens=0.713 spec=0.636 f1=0.621 auc=0.704  train=17.4s inf=0.0222ms/img
+  fold=2 PCA/100  acc=0.636 sens=0.040 spec=0.977 f1=0.423 auc=0.719  train=22.7s inf=0.0280ms/img
+  fold=3 PCA/100  acc=0.763 sens=0.237 spec=0.980 f1=0.612 auc=0.903  train=22.7s inf=0.0244ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                  
+                                                        [ACombos:  31%|###1      | 5/16 [1:10:23<2:26:59, 801.74s/combo, method=MI, bands=4]
+  Folds:   0%|          | 0/3 [04:17<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:17<08:34, 257.16s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:17<08:34, 257.16s/fold, fold=2][A                                                                                  
+                                                                 [ACombos:  31%|###1      | 5/16 [1:14:42<2:26:59, 801.74s/combo, method=MI, bands=4]
+  Folds:  33%|###3      | 1/3 [08:36<08:34, 257.16s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:36<04:18, 258.57s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:36<04:18, 258.57s/fold, fold=3][A                                                                                  
+                                                                 [ACombos:  31%|###1      | 5/16 [1:19:02<2:26:59, 801.74s/combo, method=MI, bands=4]
+  Folds:  67%|######6   | 2/3 [12:56<04:18, 258.57s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [12:56<00:00, 259.15s/fold, fold=3][A
+                                                                 [ACombos:  38%|###7      | 6/16 [1:19:02<2:12:11, 793.18s/combo, method=MI, bands=4]Combos:  38%|###7      | 6/16 [1:19:02<2:12:11, 793.18s/combo, method=MI, bands=10]  fold=1 MI/  4  acc=0.684 sens=0.570 spec=0.722 f1=0.624 auc=0.649  train=4.2s inf=0.0175ms/img
+  fold=2 MI/  4  acc=0.736 sens=0.473 spec=0.887 f1=0.688 auc=0.685  train=6.8s inf=0.0286ms/img
+  fold=3 MI/  4  acc=0.808 sens=0.482 spec=0.943 f1=0.735 auc=0.821  train=6.3s inf=0.0226ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                   
+                                                        [ACombos:  38%|###7      | 6/16 [1:23:21<2:12:11, 793.18s/combo, method=MI, bands=10]
+  Folds:   0%|          | 0/3 [04:18<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:18<08:37, 258.74s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:18<08:37, 258.74s/fold, fold=2][A                                                                                   
+                                                                 [ACombos:  38%|###7      | 6/16 [1:27:47<2:12:11, 793.18s/combo, method=MI, bands=10]
+  Folds:  33%|###3      | 1/3 [08:44<08:37, 258.74s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:44<04:23, 263.04s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:44<04:23, 263.04s/fold, fold=3][A                                                                                   
+                                                                 [ACombos:  38%|###7      | 6/16 [1:32:11<2:12:11, 793.18s/combo, method=MI, bands=10]
+  Folds:  67%|######6   | 2/3 [13:08<04:23, 263.04s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [13:08<00:00, 263.41s/fold, fold=3][A
+                                                                 [ACombos:  44%|####3     | 7/16 [1:32:11<1:58:45, 791.70s/combo, method=MI, bands=10]Combos:  44%|####3     | 7/16 [1:32:11<1:58:45, 791.70s/combo, method=MI, bands=20]  fold=1 MI/ 10  acc=0.712 sens=0.586 spec=0.754 f1=0.651 auc=0.663  train=6.1s inf=0.0172ms/img
+  fold=2 MI/ 10  acc=0.748 sens=0.468 spec=0.909 f1=0.698 auc=0.684  train=10.1s inf=0.0278ms/img
+  fold=3 MI/ 10  acc=0.814 sens=0.497 spec=0.945 f1=0.744 auc=0.831  train=8.9s inf=0.0226ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                   
+                                                        [ACombos:  44%|####3     | 7/16 [1:36:36<1:58:45, 791.70s/combo, method=MI, bands=20]
+  Folds:   0%|          | 0/3 [04:24<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:24<08:49, 264.98s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:24<08:49, 264.98s/fold, fold=2][A                                                                                   
+                                                                 [ACombos:  44%|####3     | 7/16 [1:41:08<1:58:45, 791.70s/combo, method=MI, bands=20]
+  Folds:  33%|###3      | 1/3 [08:56<08:49, 264.98s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:56<04:29, 269.00s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:56<04:29, 269.00s/fold, fold=3][A                                                                                   
+                                                                 [ACombos:  44%|####3     | 7/16 [1:45:37<1:58:45, 791.70s/combo, method=MI, bands=20]
+  Folds:  67%|######6   | 2/3 [13:25<04:29, 269.00s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [13:25<00:00, 269.07s/fold, fold=3][A
+                                                                 [ACombos:  50%|#####     | 8/16 [1:45:37<1:46:09, 796.23s/combo, method=MI, bands=20]Combos:  50%|#####     | 8/16 [1:45:37<1:46:09, 796.23s/combo, method=MI, bands=50]  fold=1 MI/ 20  acc=0.724 sens=0.598 spec=0.766 f1=0.663 auc=0.677  train=8.0s inf=0.0171ms/img
+  fold=2 MI/ 20  acc=0.742 sens=0.439 spec=0.914 f1=0.686 auc=0.654  train=13.1s inf=0.0282ms/img
+  fold=3 MI/ 20  acc=0.813 sens=0.500 spec=0.942 f1=0.744 auc=0.820  train=12.7s inf=0.0287ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                   
+                                                        [ACombos:  50%|#####     | 8/16 [1:50:04<1:46:09, 796.23s/combo, method=MI, bands=50]
+  Folds:   0%|          | 0/3 [04:26<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:26<08:53, 266.92s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:26<08:53, 266.92s/fold, fold=2][A                                                                                   
+                                                                 [ACombos:  50%|#####     | 8/16 [1:54:44<1:46:09, 796.23s/combo, method=MI, bands=50]
+  Folds:  33%|###3      | 1/3 [09:07<08:53, 266.92s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [09:07<04:34, 274.78s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [09:07<04:34, 274.78s/fold, fold=3][A                                                                                   
+                                                                 [ACombos:  50%|#####     | 8/16 [1:59:20<1:46:09, 796.23s/combo, method=MI, bands=50]
+  Folds:  67%|######6   | 2/3 [13:43<04:34, 274.78s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [13:43<00:00, 275.33s/fold, fold=3][A
+                                                                 [ACombos:  56%|#####6    | 9/16 [1:59:20<1:33:52, 804.66s/combo, method=MI, bands=50]Combos:  56%|#####6    | 9/16 [1:59:20<1:33:52, 804.66s/combo, method=MI, bands=100]  fold=1 MI/ 50  acc=0.712 sens=0.639 spec=0.736 f1=0.659 auc=0.700  train=14.6s inf=0.0208ms/img
+  fold=2 MI/ 50  acc=0.740 sens=0.417 spec=0.924 f1=0.679 auc=0.637  train=23.2s inf=0.0280ms/img
+  fold=3 MI/ 50  acc=0.819 sens=0.525 spec=0.941 f1=0.755 auc=0.837  train=19.9s inf=0.0254ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                    
+                                                        [ACombos:  56%|#####6    | 9/16 [2:03:54<1:33:52, 804.66s/combo, method=MI, bands=100]
+  Folds:   0%|          | 0/3 [04:33<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:33<09:07, 273.67s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:33<09:07, 273.67s/fold, fold=2][A                                                                                    
+                                                                 [ACombos:  56%|#####6    | 9/16 [2:08:42<1:33:52, 804.66s/combo, method=MI, bands=100]
+  Folds:  33%|###3      | 1/3 [09:21<09:07, 273.67s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [09:21<04:42, 282.14s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [09:21<04:42, 282.14s/fold, fold=3][A                                                                                    
+                                                                 [ACombos:  56%|#####6    | 9/16 [2:13:24<1:33:52, 804.66s/combo, method=MI, bands=100]
+  Folds:  67%|######6   | 2/3 [14:03<04:42, 282.14s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [14:03<00:00, 282.18s/fold, fold=3][A
+                                                                 [ACombos:  62%|######2   | 10/16 [2:13:24<1:21:40, 816.80s/combo, method=MI, bands=100]Combos:  62%|######2   | 10/16 [2:13:24<1:21:40, 816.80s/combo, method=LASSO, bands=4]  fold=1 MI/100  acc=0.671 sens=0.672 spec=0.671 f1=0.630 auc=0.709  train=19.2s inf=0.0206ms/img
+  fold=2 MI/100  acc=0.721 sens=0.361 spec=0.926 f1=0.647 auc=0.743  train=31.9s inf=0.0292ms/img
+  fold=3 MI/100  acc=0.831 sens=0.636 spec=0.911 f1=0.786 auc=0.894  train=25.4s inf=0.0280ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                      
+                                                        [ACombos:  62%|######2   | 10/16 [2:17:47<1:21:40, 816.80s/combo, method=LASSO, bands=4]
+  Folds:   0%|          | 0/3 [04:23<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:23<08:46, 263.16s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:23<08:46, 263.16s/fold, fold=2][A                                                                                      
+                                                                 [ACombos:  62%|######2   | 10/16 [2:22:08<1:21:40, 816.80s/combo, method=LASSO, bands=4]
+  Folds:  33%|###3      | 1/3 [08:43<08:46, 263.16s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:43<04:21, 261.76s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:43<04:21, 261.76s/fold, fold=3][A                                                                                      
+                                                                 [ACombos:  62%|######2   | 10/16 [2:26:17<1:21:40, 816.80s/combo, method=LASSO, bands=4]
+  Folds:  67%|######6   | 2/3 [12:52<04:21, 261.76s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [12:52<00:00, 255.95s/fold, fold=3][A
+                                                                 [ACombos:  69%|######8   | 11/16 [2:26:17<1:06:56, 803.40s/combo, method=LASSO, bands=4]Combos:  69%|######8   | 11/16 [2:26:17<1:06:56, 803.40s/combo, method=LASSO, bands=10]  fold=1 LASSO/  4  acc=0.628 sens=0.769 spec=0.581 f1=0.605 auc=0.728  train=3.1s inf=0.0196ms/img
+  fold=2 LASSO/  4  acc=0.643 sens=0.092 spec=0.958 f1=0.466 auc=0.527  train=5.5s inf=0.0334ms/img
+  fold=3 LASSO/  4  acc=0.825 sens=0.516 spec=0.953 f1=0.759 auc=0.833  train=4.5s inf=0.0236ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                       
+                                                        [ACombos:  69%|######8   | 11/16 [2:32:17<1:06:56, 803.40s/combo, method=LASSO, bands=10]
+  Folds:   0%|          | 0/3 [05:59<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [05:59<11:59, 359.75s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [05:59<11:59, 359.75s/fold, fold=2][A                                                                                       
+                                                                 [ACombos:  69%|######8   | 11/16 [2:39:12<1:06:56, 803.40s/combo, method=LASSO, bands=10]
+  Folds:  33%|###3      | 1/3 [12:54<11:59, 359.75s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [12:54<06:32, 392.27s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [12:54<06:32, 392.27s/fold, fold=3][A                                                                                       
+                                                                 [ACombos:  69%|######8   | 11/16 [2:46:18<1:06:56, 803.40s/combo, method=LASSO, bands=10]
+  Folds:  67%|######6   | 2/3 [20:00<06:32, 392.27s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [20:00<00:00, 407.53s/fold, fold=3][A
+                                                                 [ACombos:  75%|#######5  | 12/16 [2:46:18<1:01:36, 924.19s/combo, method=LASSO, bands=10]Combos:  75%|#######5  | 12/16 [2:46:18<1:01:36, 924.19s/combo, method=LASSO, bands=20]  fold=1 LASSO/ 10  acc=0.658 sens=0.820 spec=0.604 f1=0.636 auc=0.775  train=9.3s inf=0.0284ms/img
+  fold=2 LASSO/ 10  acc=0.639 sens=0.045 spec=0.979 f1=0.430 auc=0.677  train=16.4s inf=0.0399ms/img
+  fold=3 LASSO/ 10  acc=0.845 sens=0.573 spec=0.957 f1=0.790 auc=0.912  train=12.7s inf=0.0383ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                       
+                                                        [ACombos:  75%|#######5  | 12/16 [2:53:21<1:01:36, 924.19s/combo, method=LASSO, bands=20]
+  Folds:   0%|          | 0/3 [07:02<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [07:02<14:05, 422.96s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [07:02<14:05, 422.96s/fold, fold=2][A                                                                                       
+                                                                 [ACombos:  75%|#######5  | 12/16 [2:58:25<1:01:36, 924.19s/combo, method=LASSO, bands=20]
+  Folds:  33%|###3      | 1/3 [12:07<14:05, 422.96s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [12:07<05:53, 353.12s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [12:07<05:53, 353.12s/fold, fold=3][A                                                                                       
+                                                                 [ACombos:  75%|#######5  | 12/16 [3:02:48<1:01:36, 924.19s/combo, method=LASSO, bands=20]
+  Folds:  67%|######6   | 2/3 [16:30<05:53, 353.12s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [16:30<00:00, 311.93s/fold, fold=3][A
+                                                                 [ACombos:  81%|########1 | 13/16 [3:02:48<47:12, 944.16s/combo, method=LASSO, bands=20]  Combos:  81%|########1 | 13/16 [3:02:48<47:12, 944.16s/combo, method=LASSO, bands=50]  fold=1 LASSO/ 20  acc=0.677 sens=0.832 spec=0.625 f1=0.653 auc=0.778  train=11.0s inf=0.0245ms/img
+  fold=2 LASSO/ 20  acc=0.641 sens=0.032 spec=0.989 f1=0.419 auc=0.717  train=9.2s inf=0.0240ms/img
+  fold=3 LASSO/ 20  acc=0.841 sens=0.636 spec=0.925 f1=0.796 auc=0.903  train=6.2s inf=0.0254ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                     
+                                                        [ACombos:  81%|########1 | 13/16 [3:07:07<47:12, 944.16s/combo, method=LASSO, bands=50]
+  Folds:   0%|          | 0/3 [04:18<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:18<08:37, 258.91s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:18<08:37, 258.91s/fold, fold=2][A                                                                                     
+                                                                 [ACombos:  81%|########1 | 13/16 [3:11:34<47:12, 944.16s/combo, method=LASSO, bands=50]
+  Folds:  33%|###3      | 1/3 [08:46<08:37, 258.91s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:46<04:23, 263.98s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:46<04:23, 263.98s/fold, fold=3][A                                                                                     
+                                                                 [ACombos:  81%|########1 | 13/16 [3:15:58<47:12, 944.16s/combo, method=LASSO, bands=50]
+  Folds:  67%|######6   | 2/3 [13:10<04:23, 263.98s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [13:10<00:00, 264.04s/fold, fold=3][A
+                                                                 [ACombos:  88%|########7 | 14/16 [3:15:58<29:55, 897.78s/combo, method=LASSO, bands=50]Combos:  88%|########7 | 14/16 [3:15:58<29:55, 897.78s/combo, method=LASSO, bands=100]  fold=1 LASSO/ 50  acc=0.682 sens=0.837 spec=0.631 f1=0.659 auc=0.790  train=7.5s inf=0.0157ms/img
+  fold=2 LASSO/ 50  acc=0.641 sens=0.030 spec=0.990 f1=0.418 auc=0.739  train=15.1s inf=0.0238ms/img
+  fold=3 LASSO/ 50  acc=0.848 sens=0.647 spec=0.931 f1=0.805 auc=0.910  train=10.7s inf=0.0218ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                      
+                                                        [ACombos:  88%|########7 | 14/16 [3:20:22<29:55, 897.78s/combo, method=LASSO, bands=100]
+  Folds:   0%|          | 0/3 [04:24<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:24<08:48, 264.09s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:24<08:48, 264.09s/fold, fold=2][A                                                                                      
+                                                                 [ACombos:  88%|########7 | 14/16 [3:24:57<29:55, 897.78s/combo, method=LASSO, bands=100]
+  Folds:  33%|###3      | 1/3 [08:58<08:48, 264.09s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:58<04:30, 270.22s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [08:58<04:30, 270.22s/fold, fold=3][A                                                                                      
+                                                                 [ACombos:  88%|########7 | 14/16 [3:29:26<29:55, 897.78s/combo, method=LASSO, bands=100]
+  Folds:  67%|######6   | 2/3 [13:28<04:30, 270.22s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [13:28<00:00, 269.86s/fold, fold=3][A
+                                                                 [ACombos:  94%|#########3| 15/16 [3:29:26<14:30, 870.73s/combo, method=LASSO, bands=100]Combos:  94%|#########3| 15/16 [3:29:26<14:30, 870.73s/combo, method=FullSpectrum, bands=699]  fold=1 LASSO/100  acc=0.680 sens=0.823 spec=0.632 f1=0.655 auc=0.758  train=10.8s inf=0.0190ms/img
+  fold=2 LASSO/100  acc=0.641 sens=0.025 spec=0.992 f1=0.413 auc=0.775  train=22.1s inf=0.0234ms/img
+  fold=3 LASSO/100  acc=0.857 sens=0.646 spec=0.945 f1=0.815 auc=0.921  train=16.1s inf=0.0215ms/img
+
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s][A
+  Folds:   0%|          | 0/3 [00:00<?, ?fold/s, fold=1][A                                                                                             
+                                                        [ACombos:  94%|#########3| 15/16 [3:34:25<14:30, 870.73s/combo, method=FullSpectrum, bands=699]
+  Folds:   0%|          | 0/3 [04:58<?, ?fold/s, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:58<09:57, 298.58s/fold, fold=1][A
+  Folds:  33%|###3      | 1/3 [04:58<09:57, 298.58s/fold, fold=2][A                                                                                             
+                                                                 [ACombos:  94%|#########3| 15/16 [3:40:05<14:30, 870.73s/combo, method=FullSpectrum, bands=699]
+  Folds:  33%|###3      | 1/3 [10:38<09:57, 298.58s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [10:38<05:23, 323.13s/fold, fold=2][A
+  Folds:  67%|######6   | 2/3 [10:38<05:23, 323.13s/fold, fold=3][A                                                                                             
+                                                                 [ACombos:  94%|#########3| 15/16 [3:45:23<14:30, 870.73s/combo, method=FullSpectrum, bands=699]
+  Folds:  67%|######6   | 2/3 [15:56<05:23, 323.13s/fold, fold=3][A
+  Folds: 100%|##########| 3/3 [15:56<00:00, 320.60s/fold, fold=3][A
+                                                                 [ACombos: 100%|##########| 16/16 [3:45:23<00:00, 896.54s/combo, method=FullSpectrum, bands=699]Combos: 100%|##########| 16/16 [3:45:23<00:00, 845.21s/combo, method=FullSpectrum, bands=699]
+  fold=1 FullSpectrum/699  acc=0.668 sens=0.763 spec=0.637 f1=0.639 auc=0.729  train=41.2s inf=0.0400ms/img
+  fold=2 FullSpectrum/699  acc=0.637 sens=0.015 spec=0.993 f1=0.403 auc=0.708  train=77.9s inf=0.0424ms/img
+  fold=3 FullSpectrum/699  acc=0.828 sens=0.555 spec=0.940 f1=0.769 auc=0.913  train=55.7s inf=0.0452ms/img
+
+All folds complete.
+Summary saved to: results\RF_v2\rf_v2_summary.csv
+Done.
