@@ -13,8 +13,9 @@
 #
 # Raw folder deleted ONLY when ALL of a patient's ROIs pass ALL checks.
 
-DATA_ROOT  = r"C:\Users\mokas\OneDrive\Desktop\HSI"
-OUT_FOLDER = r"C:\Users\mokas\OneDrive\Desktop\HSI\preprocessed"
+from utils.config import DATA_ROOT as _CFG_DATA_ROOT, PREPROCESSED_DIR as _CFG_PREP_DIR
+DATA_ROOT  = str(_CFG_DATA_ROOT)
+OUT_FOLDER = str(_CFG_PREP_DIR)
 
 MAX_WAVELENGTH_NM    = 909.0
 AUTO_DELETE_PATIENTS = ["P2", "P3", "top-level"]

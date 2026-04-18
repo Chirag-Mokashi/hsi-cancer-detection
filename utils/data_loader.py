@@ -12,8 +12,7 @@ import numpy as np
 from sklearn.utils.class_weight import compute_class_weight as _skl_cw
 
 # ---- Paths and constants ----
-PREPROCESSED_DIR  = Path(r'C:\Users\mokas\OneDrive\Desktop\HSI\preprocessed')
-BAND_SEL_DIR      = Path(r'C:\Users\mokas\OneDrive\Desktop\HSI\band_selection')
+from utils.config import PREPROCESSED_DIR, BAND_SEL_DIR
 BLOCK_ROWS        = 10
 PIXELS_PER_ROI    = 500
 BAND_COUNTS       = [4, 10, 20, 50, 100]

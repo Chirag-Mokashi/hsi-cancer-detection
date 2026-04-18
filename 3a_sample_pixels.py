@@ -12,7 +12,7 @@ from pathlib import Path
 import time
 
 # ---- Config ----
-PREPROCESSED_DIR = Path(r"C:\Users\mokas\OneDrive\Desktop\HSI\preprocessed")
+from utils.config import PREPROCESSED_DIR
 OUTPUT_FILE      = PREPROCESSED_DIR / "samples.h5"
 PIXELS_PER_ROI   = 500
 BLOCK_ROWS       = 10    # load 10 consecutive rows per file: 10 x 1004 = 10040 pixels

@@ -9,7 +9,8 @@ try:
     drive.mount('/content/drive')
     preprocessed = Path('/content/drive/MyDrive/HSI/preprocessed')
 except ImportError:
-    preprocessed = Path(r"C:\Users\mokas\OneDrive\Desktop\HSI\preprocessed")
+    from utils.config import PREPROCESSED_DIR
+    preprocessed = PREPROCESSED_DIR
 
 files = sorted(f for f in preprocessed.glob("*.h5") if f.name != 'samples.h5')
 

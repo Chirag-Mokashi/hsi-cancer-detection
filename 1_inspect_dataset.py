@@ -2,9 +2,6 @@
 # HistologyHSI-GB Dataset Inspector
 # Run: python inspect_dataset.py
 
-# EDIT THIS LINE with your actual path
-DATA_ROOT = r"C:\Users\mokas\OneDrive\Desktop\HSI"
-
 import os
 import re
 import sys
@@ -12,7 +9,8 @@ import numpy as np
 from pathlib import Path
 from collections import defaultdict
 
-root = Path(DATA_ROOT)
+from utils.config import DATA_ROOT
+root = DATA_ROOT
 if not root.exists():
     print("[ERROR] Path not found: " + str(DATA_ROOT))
     print("Fix: open Windows Explorer, go to HSI folder,")

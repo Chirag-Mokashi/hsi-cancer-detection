@@ -13,8 +13,9 @@ from pathlib import Path
 import time
 
 # ---- Config ----
-SAMPLES_FILE = Path(r"C:\Users\mokas\OneDrive\Desktop\HSI\preprocessed\samples.h5")
-OUT_DIR      = Path(r"C:\Users\mokas\OneDrive\Desktop\HSI\dataset_summary\sample_analysis")
+from utils.config import DATA_ROOT, PREPROCESSED_DIR
+SAMPLES_FILE = PREPROCESSED_DIR / "samples.h5"
+OUT_DIR      = DATA_ROOT / "dataset_summary" / "sample_analysis"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 # ----------------
 
