@@ -197,6 +197,9 @@ def compute_class_weights(y):
     -------
     dict {0: float, 1: float}
     """
+    if len(np.unique(y)) < 2:
+        print("WARNING: single-class fold detected, using unit weights")
+        return {0: 1.0, 1: 1.0}
     classes = np.array([0, 1])
     weights = _skl_cw('balanced', classes=classes, y=y)
     return {0: float(weights[0]), 1: float(weights[1])}

@@ -125,6 +125,11 @@ def main():
             pred  = clf.predict(X_te)
             inf_ms_per_image = (time.time() - t2) / len(y_te) * 1000
 
+            try:
+                auc_val = round(roc_auc_score(y_te, proba), 6)
+            except ValueError:
+                auc_val = float('nan')
+
             row = {
                 'model':                      MODEL,
                 'method':                     method,
@@ -134,7 +139,7 @@ def main():
                 'sensitivity':                round(recall_score(y_te, pred, pos_label=1, zero_division=0), 6),
                 'specificity':                round(recall_score(y_te, pred, pos_label=0, zero_division=0), 6),
                 'f1':                         round(f1_score(y_te, pred, average='macro', zero_division=0), 6),
-                'auc':                        round(roc_auc_score(y_te, proba), 6),
+                'auc':                        auc_val,
                 'train_time_sec':             round(train_time_sec, 3),
                 'inference_time_per_image_ms': round(inf_ms_per_image, 6),
             }
