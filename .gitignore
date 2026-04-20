@@ -54,3 +54,15 @@ notebooks/completed/
 Sem1-NEU/
 rclone-v1.73.3-windows-amd64/
 .tmp.driveupload/
+
+# Graphify tool outputs
+.graphify_ast.json
+.graphify_detect.json
+.graphify_python
+graphify-out/
+
+# Internal review / planning docs
+review/FIX_789_EXECUTION.md
+review/REVIEW_PLAN.md
+review/TERMINAL_PROMPTS.md
+review/review_dashboard.html
