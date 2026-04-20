@@ -599,9 +599,118 @@ Step 7: ablation studies - band count, patch size, class weighting
 - Key findings documented: HybridSN peak AUC, SVM practical winner, P2 collapse,
   ViT/MI divergence, DL not clearly better than classical ML at n=3
 
+## April 9–14: Decision-Making Period
+
+No code commits. 13 decisions locked via DECISIONS_02_locked_decisions.md (private).
+
+| Q | Decision |
+|---|---|
+| Q1 | HybridSN ran on A100 (confirmed) |
+| Q2 | Exclude patch size 1 from HybridSN ablation (collapses spatial patch meaning) |
+| Q3 | Skip ablation — outside current execution window |
+| Q4 | Remove Wilcoxon — n=3 folds insufficient for signed-rank test |
+| Q5 | Decide extra plots once results are in hand (resolved April 9–14) |
+| Q6 | Download result CSVs manually from Google Drive |
+| Q7 | April 10 = minimum showable package target |
+| Q8 | Paper format not locked yet; keep outputs adaptable |
+| Q9 | Keep P2 sensitivity collapse as a finding, not a bug fix |
+| Q10 | Report honestly if SVM beats DL (legitimate small-dataset outcome) |
+| Q11 | McNemar test — no (n=3 too small) |
+| Q12 | ACO deferred; mention as future work if needed |
+| Q13 | Ablation = separate section if included later |
+
+---
+
+## April 15: Extra Plots and ROC Scripts
+
+**Commit:** 329ae07
+
+- 4 new summary plots added to results/summary/:
+  - per_patient_auc_bar.png
+  - per_patient_sens_spec.png
+  - auc_vs_bands_mean.png
+  - roc_dl_panel.png (HybridSN + ViT ROC curves, 3 folds each)
+- Added scripts/roc_panel.py (DL ROC panel generator)
+- Added scripts/roc_rf_svm.py (RF/SVM ROC overlay generator per combo)
+- Updated 5_compile_results.py with extra plot generation code
+- Moved docs/ and notebooks/completed/ to .gitignore — kept on disk, excluded from public repo
+
+---
+
+## April 18: Code Review — 9 Fixes Applied
+
+Full 9-fix code review playbook reviewed and applied in one session (~13 commits).
+
+| Fix | Change | Commit |
+|-----|--------|--------|
+| Fix 1 | Remove reflectance clipping in calibrate(); log out-of-range voxels instead | 50c1c6e |
+| Fix 2 | Guard single-class folds in RF/SVM evaluation (skip AUC if only one class) | 5198658 |
+| Fix 3 | Deterministic test-set sampling: np.linspace grid instead of RNG | f08a8c4 |
+| Fix 4 | Document top-level ROI provenance assumption (Option C: accept as-is) | c29ca01 |
+| Fix 5 | Guard raw-data deletion behind explicit flag + trash folder | 33a71e6 |
+| Fix 6 | Centralize data root via HSI_DATA_ROOT env var (utils/config.py) | 01b611e |
+| Fix 7a | regenerate_summary.py: use utils.config paths | f6c71d2 |
+| Fix 7b | regenerate_summary.py: discover patients dynamically | bbb65a2 |
+| Fix 7c | regenerate_summary.py: remove stale clipping reference | c8ec9a4 |
+| Fix 7d | Delete one-off migration scripts (fix_drive.py, fix_patient.py, patch_vit.py) | e9d66ca |
+| Fix 7e | Guard single-class folds in scripts/roc_rf_svm.py | c05cc4e |
+| Fix 8a | Add git_sha/seed/code_version provenance to RF, SVM, combined CSVs | 47e4f11 |
+| Fix 8b | Add provenance columns to HybridSN and ViT notebooks | efd004b |
+
+---
+
+## April 18–20: V2 Sweeps (RF + SVM) and Comparison Table
+
+- Smoke test added: tests/smoke_rf_one_fold.py (one RF fold, n_estimators=50)
+- RF and SVM version-bumped to v2; output redirected to results/RF_v2/ and results/SVM_v2/
+- review/compare_v1_v2.py created to compute v1 vs v2 delta table
+
+**RF v2 sweep** (commit 8a93540, April 18): 48 folds complete
+- Deterministic test sampling (seed=42, np.linspace grid)
+- Provenance columns: git_sha, seed, code_version in every row
+
+**SVM v2 sweep** (commit 200a0fc, April 20): 48 folds complete
+
+**v1 vs v2 comparison** (review/v1_vs_v2_comparison.csv + .md):
+- All AUC shifts <= +0.04 — results stable across versions
+- 5 combos show VARIANCE_DROP (std_ratio < 0.70) — deterministic sampling reduced noise
+- No SHIFT flag on any combo (|d_mean| <= 0.02 for all)
+
+**V2 Colab notebooks** created: 4c_hybridSN_v2.ipynb, 4d_vit_v2.ipynb
+- Auto-copy utils from Drive to /content before running (no git clone dependency)
+
+---
+
+## April 20: V1 Baseline Locked
+
+**Commits:** ef4ff87, 3efad34
+
+- V1 combined summary regenerated: results/summary/combined_results.csv (186 rows)
+- All 8 summary plots verified present in results/summary/
+- RF and SVM ROC overlays committed:
+  - results/RF/plots/roc_LASSO_100_overlay.png
+  - results/SVM/plots/roc_LASSO_100_overlay.png
+- 5_compile_results_v2.py created — ready to run once HybridSN v2 + ViT v2 finish
+  - Reads from results/RF_v2/, results/SVM_v2/, results/HybridSN/ (v2), results/ViT/ (v2)
+  - Outputs to results/summary_v2/ (never overwrites v1)
+
+**Current Status (as of April 20, 2026):**
+
+| Model | V1 | V2 |
+|-------|----|----|
+| RF | Complete (48 runs) | Complete (48 runs) |
+| SVM | Complete (48 runs) | Complete (48 runs) |
+| HybridSN | Complete (45 runs) | Running on Colab T4 (~24h) |
+| ViT | Complete (45 runs) | Pending compute units |
+
+---
+
 ## Next Actions
 
-1. Make decisions from APRIL09_CHECKPOINT.md
-2. Generate any additional plots decided (ROC curves, confusion matrices, etc.)
-3. Write paper draft (target April 10 minimum package, April 26 hard deadline)
-4. Future: expand to P4-P13 on HPC, add ACO, full ablation study
+1. Wait for HybridSN v2 to finish on Colab; download hybridSN_v2_results.csv to results/HybridSN/
+2. Run ViT v2 on Colab (restore compute units); download vit_v2_results.csv to results/ViT/
+3. Once both DL v2 runs done: `python 5_compile_results_v2.py` -> results/summary_v2/
+4. Re-run `python review/compare_v1_v2.py` with all 4 models; commit final comparison table
+5. Write paper Results section using v1 baseline (all 4 models, 186 runs)
+6. Update numbers when v2 completes (reproducibility supplement)
+7. Future: expand to P4-P13 on HPC, add ACO, full ablation study
